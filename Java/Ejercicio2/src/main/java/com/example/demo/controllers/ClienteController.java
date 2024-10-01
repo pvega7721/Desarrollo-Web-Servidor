@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.modelo.Cliente;
@@ -29,6 +31,11 @@ public class ClienteController {
 	@GetMapping("/clientes")
 	public List<Cliente> obtenerClientes() {
 		return clientes;
+	}
+	@PostMapping("/clientes")
+	public Cliente postCliente(@RequestBody Cliente cliente) {
+		clientes.add(cliente);
+		return cliente;
 	}
 
 	@GetMapping("/clientes/{username}")
