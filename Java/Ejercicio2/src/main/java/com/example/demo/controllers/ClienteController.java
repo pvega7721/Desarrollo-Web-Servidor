@@ -3,9 +3,11 @@ package com.example.demo.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,11 +34,6 @@ public class ClienteController {
 	public List<Cliente> obtenerClientes() {
 		return clientes;
 	}
-	@PostMapping("/clientes")
-	public Cliente postCliente(@RequestBody Cliente cliente) {
-		clientes.add(cliente);
-		return cliente;
-	}
 
 	@GetMapping("/clientes/{username}")
 	public Cliente obtenerCliente(@PathVariable String username) {
@@ -46,6 +43,31 @@ public class ClienteController {
 			}
 		}
 		return null;
+	}
+
+	@PostMapping("/clientes")
+	public Cliente postCliente(@RequestBody Cliente cliente) {
+		clientes.add(cliente);
+		return cliente;
+	}
+
+	@PutMapping("/clientes")
+	public Cliente putCliente(@RequestBody Cliente modif) {
+		for (Cliente cliente : clientes) {
+			if (cliente.getId() == modif.getId()) {
+				cliente.setNombre(modif.getNombre());
+				cliente.setPasswd(modif.getPasswd());
+				cliente.setUsername(modif.getUsername());
+				return cliente;
+			}
+		}
+		return null;
+
+	}
+	
+	@DeleteMapping("/clientes/{id}")
+	public Cliente deleteCliente(@PathVariable int id) {
+		clientes.remove(id);
 	}
 
 }
