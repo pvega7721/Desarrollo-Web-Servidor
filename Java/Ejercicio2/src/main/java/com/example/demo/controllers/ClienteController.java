@@ -64,10 +64,10 @@ public class ClienteController {
 		return null;
 
 	}
-	
+	/*
 	@DeleteMapping("/clientes/{id}")
 	public Cliente deleteCliente(@PathVariable int id) {
 		clientes.remove(id);
 	}
-
+*/
 }
