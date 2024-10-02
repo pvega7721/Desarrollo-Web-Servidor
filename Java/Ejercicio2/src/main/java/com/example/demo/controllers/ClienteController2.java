@@ -11,15 +11,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.modelo.Cliente;
 
 @RestController
-public class ClienteController {
+@RequestMapping("/clientes")
+public class ClienteController2 {
 	List<Cliente> clientes = new ArrayList<>();
 
-	public ClienteController() {
+	public ClienteController2() {
 		Cliente cliente1 = new Cliente(1, "Pablo Vega", "pvega", "contraseña1");
 		Cliente cliente2 = new Cliente(2, "Juan Lopez", "jlopez", "contraseña2");
 		Cliente cliente3 = new Cliente(3, "Jorge Martínez", "jmartinez", "contraseña3");
@@ -32,12 +34,12 @@ public class ClienteController {
 
 	}
 
-	@GetMapping("/clientes")
+	@GetMapping
 	public List<Cliente> obtenerClientes() {
 		return clientes;
 	}
 
-	@GetMapping("/clientes/{username}")
+	@GetMapping("/{username}")
 	public Cliente obtenerCliente(@PathVariable String username) {
 		for (Cliente cliente : clientes) {
 			if (cliente.getUsername().equals(username)) {
@@ -47,13 +49,13 @@ public class ClienteController {
 		return null;
 	}
 
-	@PostMapping("/clientes")
+	@PostMapping
 	public Cliente postCliente(@RequestBody Cliente cliente) {
 		clientes.add(cliente);
 		return cliente;
 	}
 
-	@PutMapping("/clientes")
+	@PutMapping
 	public Cliente putCliente(@RequestBody Cliente modif) {
 		for (Cliente cliente : clientes) {
 			if (cliente.getId() == modif.getId()) {
@@ -67,7 +69,7 @@ public class ClienteController {
 
 	}
 
-	@DeleteMapping("/clientes/{id}")
+	@DeleteMapping("/{id}")
 	public Cliente deleteCliente(@PathVariable int id) {
 
 		Iterator<Cliente> iterador = clientes.iterator();
@@ -80,30 +82,30 @@ public class ClienteController {
 		}
 		return null;
 	}
-
+	
 	//Modifica un único atributo del objeto
-	@PatchMapping("/clientes")
-	public Cliente pathCliente(@RequestBody Cliente modif) {
-		for (Cliente cliente : clientes) {
-			if (cliente.getId() == modif.getId()) {
-				if (modif.getNombre() != null) {
-					System.out.println("nombre");
-					cliente.setNombre(modif.getNombre());
-				}
-				if (modif.getNombre() != null) {
-					System.out.println("pass");
-					cliente.setNombre(modif.getPasswd());
-				}
-				if (modif.getNombre() != null) {
-					System.out.println("user");
-					cliente.setNombre(modif.getUsername());
-				}
+		@PatchMapping
+		public Cliente pathCliente(@RequestBody Cliente modif) {
+			for (Cliente cliente : clientes) {
+				if (cliente.getId() == modif.getId()) {
+					if (modif.getNombre() != null) {
+						System.out.println("nombre");
+						cliente.setNombre(modif.getNombre());
+					}
+					if (modif.getNombre() != null) {
+						System.out.println("pass");
+						cliente.setNombre(modif.getPasswd());
+					}
+					if (modif.getNombre() != null) {
+						System.out.println("user");
+						cliente.setNombre(modif.getUsername());
+					}
 
-				return cliente;
+					return cliente;
 
+				}
 			}
+			return null;
 		}
-		return null;
-	}
 
-}
+	}
