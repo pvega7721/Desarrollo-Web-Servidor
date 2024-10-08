@@ -6,6 +6,14 @@
     <title>Ejercicio 1</title>
 </head>
 <body>
-    
+    <?php
+    $nombre = "Pablo";
+    $apellido1 = "Vega";
+    $apellido2 = "Flores";
+    $curso = "2ºDAW";
+    $rutaDNI = "/imagenes/foto_dni.jpg";
+    echo $nombre, " ", $apellido1, " ", $apellido2, " ", $curso;
+    echo "<img src='$rutaDNI' alt='DNI de ejemplo'/>"
+    ?>
 </body>
 </html>
