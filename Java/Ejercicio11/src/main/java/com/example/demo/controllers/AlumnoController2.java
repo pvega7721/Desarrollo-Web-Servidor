@@ -21,10 +21,11 @@ import com.example.demo.modelo.Direccion;
 @RequestMapping("/alumnos")
 public class AlumnoController2 {
 	List<Alumno> alumnos = new ArrayList<>();
+	List<Direccion> direcciones = new ArrayList<>();
 
 	public AlumnoController2() {
 		Direccion d1 = new Direccion("calle1", "1234", "ciudad1");
-		Direccion d2 = new Direccion("calle2", "1235", "ciudad2");
+		Direccion d2 = new Direccion("calle2", "1235", "ciudad1");
 		Direccion d3 = new Direccion("calle3", "1236", "ciudad3");
 		Direccion d4 = new Direccion("calle4", "1237", "ciudad4");
 
@@ -37,11 +38,46 @@ public class AlumnoController2 {
 		alumnos.add(alumno2);
 		alumnos.add(alumno3);
 		alumnos.add(alumno4);
+
+		for (Alumno alumno : alumnos) {
+			direcciones.add(alumno.getDireccion());
+		}
 	}
 
 	@GetMapping
 	public ResponseEntity<List<Alumno>> mostrarAlumnos() {
 		return ResponseEntity.ok(alumnos);
+	}
+
+	@GetMapping("/direcciones")
+	public ResponseEntity<List<Direccion>> mostrarDirecciones() {
+		return ResponseEntity.ok(direcciones);
+	}
+
+	@GetMapping("/cp:{postalCode}")
+	public ResponseEntity<Alumno> mostrarAlumnoCP(@PathVariable String postalCode) {
+		for (Alumno alumno : alumnos) {
+			if (alumno.getDireccion().getPostalCode().equals(postalCode)) {
+				return ResponseEntity.ok(alumno);
+			}
+
+		}
+		return ResponseEntity.notFound().build();
+	}
+	
+	@GetMapping("/city:{ciudad}")
+	public ResponseEntity<Integer> mostrarAlumnoCiudad(@PathVariable String ciudad){
+		Integer alumnosMismaCiudad =0;
+		for (Alumno alumno : alumnos) {
+			if(alumno.getDireccion().getCiudad().equals(ciudad)) {
+				alumnosMismaCiudad++;
+			}
+		}
+		if(alumnosMismaCiudad == 0) {
+			return ResponseEntity.notFound().build();
+		}else {
+			return ResponseEntity.ok(alumnosMismaCiudad);
+		}
 	}
 
 	@GetMapping("/{email}")
