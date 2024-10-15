@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -58,10 +60,26 @@ public class LibroController {
 		}
 		return ResponseEntity.notFound().build();
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<void> anadirLibro(@RequestBody Libro libro){
+	public ResponseEntity<Void> anadirLibro(@RequestBody Libro libro) {
 		libros.add(libro);
+		return ResponseEntity.noContent().build();
+	}
+
+	@PutMapping
+	public ResponseEntity<Void> modLibro(@RequestBody Libro mod) {
+		for (Libro libro : libros) {
+			if (libro.getId() == mod.getId()) {
+				libro.setAnoPublicacion(mod.getAnoPublicacion());
+				libro.setAutor(mod.getAutor());
+				libro.setEditorial(mod.getAutor());
+				libro.setGenero(mod.getGenero());
+				libro.setIsbn(mod.getIsbn());
+				libro.setTitulo(mod.getTitulo());
+			}
+		}
+		return ResponseEntity.noContent().build();
 	}
 
 }
