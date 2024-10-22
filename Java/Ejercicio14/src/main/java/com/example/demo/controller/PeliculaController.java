@@ -183,7 +183,7 @@ public class PeliculaController {
 		}
 		return ResponseEntity.notFound().build();
 	}
-	
+	/*
 	@GetMapping("/directorXPeliculas/{nPeliculas}")
 	public ResponseEntity<Map<String, Integer>> directorXPeliculas(@PathVariable Integer nPeliculas){
 		Map<String, Integer> mapa = new HashMap<String,Integer>();
@@ -192,6 +192,7 @@ public class PeliculaController {
 			if(mapa.containsKey(pelicula.getDirector()))
 			mapa.put(pelicula.getDirector(), nPeliculas);
 		}
+		return null;
 	}
-
+	*/
 }

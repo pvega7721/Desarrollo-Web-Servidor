@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -38,7 +39,7 @@ public class LibroController {
 
 		Libro libro1 = new Libro(1, "Titulo1", "Autor1", "editorial1", "isbn1", 2015, genero1);
 		Libro libro2 = new Libro(2, "Titulo2", "Autor2", "editorial2", "isbn2", 2017, genero2);
-		Libro libro3 = new Libro(3, "Titulo3", "Autor3", "editorial3", "isbn3", 2019, genero3);
+		Libro libro3 = new Libro(3, "Titulo3", "Autor1", "editorial3", "isbn3", 2019, genero3);
 		Libro libro4 = new Libro(4, "Titulo4", "Autor4", "editorial4", "isbn4", 2023, genero4);
 
 		libros.add(libro1);
@@ -54,7 +55,7 @@ public class LibroController {
 	}
 
 	// Consultar un libro por su título
-	@GetMapping("/{titulo}")
+	@GetMapping("/titulo/{titulo}")
 	public ResponseEntity<Libro> mostrarLibroTitulo(@PathVariable String titulo) {
 		for (Libro libro : libros) {
 			if (libro.getTitulo().equals(titulo)) {
@@ -160,13 +161,18 @@ public class LibroController {
 		}
 		
 	}
-	//NO FUNCIONA
+	
 	/*
 	@GetMapping("/{numLibros}")
-	public ResponseEntity<List<Libro>> obtenerAutoresConMasDeXLibros(@PathVariable Integer numLibros){
-		
+	public ResponseEntity<HashMap<String, Integer>> obtenerAutoresConMasDeXLibros(@PathVariable Integer numLibros){
+		HashMap<String, Integer> autoresMasXLibros = new HashMap<String, Integer>();
+		for (Libro libro: libros) {
+			
+		}
+		return null;
 	}
 	*/
+	
 	
 	
 }
