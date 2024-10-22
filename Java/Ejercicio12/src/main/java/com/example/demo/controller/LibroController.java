@@ -1,9 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -144,35 +142,31 @@ public class LibroController {
 			return ResponseEntity.ok(novelas);
 		}
 	}
-	
-	//Obtener libros por género
+
+	// Obtener libros por género
 	@GetMapping("/{genero}")
-	public ResponseEntity<List<Libro>> obtenerLibroGenero(@PathVariable String genero){
+	public ResponseEntity<List<Libro>> obtenerLibroGenero(@PathVariable String genero) {
 		List<Libro> porGenero = new ArrayList<>();
-		for(Libro libro: libros) {
-			if(libro.getGenero().contains(genero)) {
+		for (Libro libro : libros) {
+			if (libro.getGenero().contains(genero)) {
 				porGenero.add(libro);
 			}
 		}
-		if(porGenero.isEmpty()) {
+		if (porGenero.isEmpty()) {
 			return ResponseEntity.noContent().build();
-		}else {
+		} else {
 			return ResponseEntity.ok(porGenero);
 		}
-		
+
 	}
-	
+
 	/*
-	@GetMapping("/{numLibros}")
-	public ResponseEntity<HashMap<String, Integer>> obtenerAutoresConMasDeXLibros(@PathVariable Integer numLibros){
-		HashMap<String, Integer> autoresMasXLibros = new HashMap<String, Integer>();
-		for (Libro libro: libros) {
-			
-		}
-		return null;
-	}
-	*/
-	
-	
-	
+	 * @GetMapping("/{numLibros}") public ResponseEntity<HashMap<String, Integer>>
+	 * obtenerAutoresConMasDeXLibros(@PathVariable Integer numLibros){
+	 * HashMap<String, Integer> autoresMasXLibros = new HashMap<String, Integer>();
+	 * for (Libro libro: libros) {
+	 * 
+	 * } return null; }
+	 */
+
 }

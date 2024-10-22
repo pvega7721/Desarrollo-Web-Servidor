@@ -49,7 +49,6 @@ public class PeliculaController {
 		peliculas.add(pelicula3);
 		peliculas.add(pelicula4);
 		peliculas.add(pelicula5);
-		System.out.println(peliculas);
 	}
 
 	// FUNCIONA
@@ -62,7 +61,7 @@ public class PeliculaController {
 	@GetMapping("/{titulo}")
 	public ResponseEntity<Pelicula> mostrarPeliculaTitulo(@PathVariable String titulo) {
 		for (Pelicula pelicula : peliculas) {
-			if (pelicula.getTitulo().equals(titulo)) {
+			if (pelicula.getTitulo().equalsIgnoreCase(titulo)) {
 				return ResponseEntity.ok(pelicula);
 			}
 		}
@@ -104,9 +103,10 @@ public class PeliculaController {
 
 	// NO FUNCIONA
 	@PutMapping
-	public ResponseEntity<Void> modificarPeliculaTotal(@RequestBody Pelicula mod) {
+	public ResponseEntity<Pelicula> modificarPeliculaTotal(@RequestBody Pelicula mod) {
 		for (Pelicula pelicula : peliculas) {
 			if (pelicula.getId() == mod.getId()) {
+				//peliculas.set(pelicula, mod) probar esto
 				pelicula.setActores(mod.getActores());
 				pelicula.setDirector(mod.getDirector());
 				pelicula.setDuracion(mod.getDuracion());
@@ -132,8 +132,8 @@ public class PeliculaController {
 		return ResponseEntity.notFound().build();
 	}
 
-	// NO FUNCIONA
-	@GetMapping("/{director}")
+	//FUNCIONA
+	@GetMapping("/director/{director}")
 	public ResponseEntity<List<Pelicula>> obtenerPorDirector(@PathVariable String director) {
 		List<Pelicula> peliculasMismoDirector = new ArrayList<>();
 		for (Pelicula pelicula : peliculas) {
