@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -144,7 +145,7 @@ public class LibroController {
 	}
 
 	// Obtener libros por género
-	@GetMapping("/{genero}")
+	@GetMapping("/genero/{genero}")
 	public ResponseEntity<List<Libro>> obtenerLibroGenero(@PathVariable String genero) {
 		List<Libro> porGenero = new ArrayList<>();
 		for (Libro libro : libros) {
@@ -159,14 +160,12 @@ public class LibroController {
 		}
 
 	}
-
 	/*
-	 * @GetMapping("/{numLibros}") public ResponseEntity<HashMap<String, Integer>>
-	 * obtenerAutoresConMasDeXLibros(@PathVariable Integer numLibros){
+	 * @GetMapping("/numLibros{numLibros}") public ResponseEntity<HashMap<String,
+	 * Integer>> obtenerAutoresConMasDeXLibros(@PathVariable Integer numLibros) {
 	 * HashMap<String, Integer> autoresMasXLibros = new HashMap<String, Integer>();
-	 * for (Libro libro: libros) {
+	 * for (Libro libro : libros) {
 	 * 
 	 * } return null; }
 	 */
-
 }
