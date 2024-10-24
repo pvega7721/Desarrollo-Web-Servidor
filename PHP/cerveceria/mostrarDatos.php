@@ -13,7 +13,20 @@
     <p>Marca del producto: <?php echo $_REQUEST["marcaProducto"] ?> </p>
     <p>Advertencia sobre el abuso en el consumo de alcohol: <?php echo $_REQUEST["abusoConsumo"] ?> </p>
     <p>Fecha de consumo preferente: <?php echo $_REQUEST["fechaConsumo"] ?> </p>
-    <p>Sustancias que pueden causar alergias: <?php echo $_REQUEST["alergeno"] ?> </p>
+    <p>
+        Sustancias que pueden causar alergias: 
+        <?php
+        print("<ul>");
+        if(!empty($_REQUEST['alergenos'])){
+            foreach ($_REQUEST['alergenos'] as $alergeno){
+                print("<li>".$alergeno."</li>");
+                }
+        print("</ul>");
+        }else{
+            print "No has seleccionado alérgenos";
+        }        
+        ?>
+    </p>
     <p>Observaciones: <?php echo $_REQUEST["Observaciones"] ?> </p>
 </body>
 </html>
