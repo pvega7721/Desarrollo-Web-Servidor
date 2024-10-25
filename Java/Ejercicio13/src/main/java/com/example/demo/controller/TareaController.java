@@ -30,11 +30,11 @@ public class TareaController {
 		Tarea tarea1 = new Tarea(1, "Hacer la cama", "Descripción de hacer la cama",
 				LocalDate.of(2024, Month.NOVEMBER, 22), "COMPLETA");
 		Tarea tarea2 = new Tarea(2, "Bajar al perro", "Descripción de bajar al perro",
-				LocalDate.of(2024, Month.NOVEMBER, 21), "COMPLETA");
+				LocalDate.of(2024, Month.OCTOBER, 21), "COMPLETA");
 		Tarea tarea3 = new Tarea(3, "Fregar los platos", "Descripción de limpiar los platos",
-				LocalDate.of(2024, Month.NOVEMBER, 21), "PENDIENTE");
+				LocalDate.of(2024, Month.OCTOBER, 21), "PENDIENTE");
 		Tarea tarea4 = new Tarea(4, "Limpiar la ventana", "Descripción de limpiar la ventana",
-				LocalDate.of(2024, Month.NOVEMBER, 20), "EN_PROCESO");
+				LocalDate.of(2024, Month.OCTOBER, 20), "EN_PROCESO");
 
 		tareas.add(tarea1);
 		tareas.add(tarea2);
@@ -169,7 +169,6 @@ public class TareaController {
 		}
 	}
 
-	// No funciona
 	@PatchMapping("/marcarCompletadas")
 	public ResponseEntity<Void> marcarCompletadasVencidas() {
 		LocalDate hoy = LocalDate.now();
