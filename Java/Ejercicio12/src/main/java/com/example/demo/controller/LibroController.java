@@ -3,6 +3,9 @@ package com.example.demo.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
+import java.util.Set;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -160,12 +163,30 @@ public class LibroController {
 		}
 
 	}
-	/*
-	 * @GetMapping("/numLibros{numLibros}") public ResponseEntity<HashMap<String,
-	 * Integer>> obtenerAutoresConMasDeXLibros(@PathVariable Integer numLibros) {
-	 * HashMap<String, Integer> autoresMasXLibros = new HashMap<String, Integer>();
-	 * for (Libro libro : libros) {
-	 * 
-	 * } return null; }
-	 */
+
+	@GetMapping("/numLibros/{numLibros}")
+	public ResponseEntity<HashMap<String, Integer>> obtenerAutoresConMasDeXLibros(@PathVariable Integer numLibros) {
+		HashMap<String, Integer> autorYLibros = new HashMap<String, Integer>();
+		HashMap<String, Integer> autorMasXLibros = new HashMap<String, Integer>();
+		for (Libro libro : libros) {
+			String autor = libro.getAutor();
+			if (autorYLibros.containsKey(autor)) {
+				autorYLibros.put(autor, autorYLibros.get(autor) + 1);
+			} else {
+				autorYLibros.put(autor, 1);
+			}
+		}
+		Set<Entry<String, Integer>> pares = autorYLibros.entrySet();
+		for (Entry<String, Integer> par : pares) {
+			if (par.getValue() > numLibros) {
+				autorMasXLibros.put(par.getKey(), par.getValue());
+			}
+		}
+		if (autorMasXLibros.isEmpty()) {
+			return ResponseEntity.noContent().build();
+		} else {
+			return ResponseEntity.ok(autorMasXLibros);
+		}
+	}
+
 }

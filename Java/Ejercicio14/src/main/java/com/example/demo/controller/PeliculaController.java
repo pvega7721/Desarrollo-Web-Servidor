@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -106,7 +108,7 @@ public class PeliculaController {
 	public ResponseEntity<Pelicula> modificarPeliculaTotal(@RequestBody Pelicula mod) {
 		for (Pelicula pelicula : peliculas) {
 			if (pelicula.getId() == mod.getId()) {
-				//peliculas.set(pelicula, mod) probar esto
+				// peliculas.set(pelicula, mod) probar esto
 				pelicula.setActores(mod.getActores());
 				pelicula.setDirector(mod.getDirector());
 				pelicula.setDuracion(mod.getDuracion());
@@ -132,7 +134,7 @@ public class PeliculaController {
 		return ResponseEntity.notFound().build();
 	}
 
-	//FUNCIONA
+	// FUNCIONA
 	@GetMapping("/director/{director}")
 	public ResponseEntity<List<Pelicula>> obtenerPorDirector(@PathVariable String director) {
 		List<Pelicula> peliculasMismoDirector = new ArrayList<>();
@@ -183,16 +185,31 @@ public class PeliculaController {
 		}
 		return ResponseEntity.notFound().build();
 	}
-	/*
-	@GetMapping("/directorXPeliculas/{nPeliculas}")
-	public ResponseEntity<Map<String, Integer>> directorXPeliculas(@PathVariable Integer nPeliculas){
-		Map<String, Integer> mapa = new HashMap<String,Integer>();
-		Map<String, Integer> mapaFinal = new HashMap<String,Integer>();
+
+	@GetMapping("/nPeliculas/{nPeliculas}")
+	public ResponseEntity<Map<String, Integer>> directorXPeliculas(@PathVariable Integer nPeliculas) {
+		Map<String, Integer> directorYPeliculas = new HashMap<String, Integer>();
+		Map<String, Integer> directorMasXPeliculas = new HashMap<String, Integer>();
 		for (Pelicula pelicula : peliculas) {
-			if(mapa.containsKey(pelicula.getDirector()))
-			mapa.put(pelicula.getDirector(), nPeliculas);
+			String director = pelicula.getDirector();
+			if (directorYPeliculas.containsKey(director)) {
+
+				directorYPeliculas.put(director, directorYPeliculas.get(director) + 1);
+			} else {
+				directorYPeliculas.put(director, 1);
+			}
 		}
-		return null;
+		Set<Entry<String, Integer>> pares = directorYPeliculas.entrySet();
+		for (Entry<String, Integer> par : pares) {
+			if (par.getValue() > nPeliculas) {
+				directorMasXPeliculas.put(par.getKey(), par.getValue());
+			}
+		}
+		if (directorMasXPeliculas.isEmpty()) {
+			return ResponseEntity.noContent().build();
+		} else {
+			return ResponseEntity.ok(directorMasXPeliculas);
+		}
 	}
-	*/
+
 }
