@@ -5,6 +5,7 @@ import java.time.Month;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -35,7 +36,16 @@ public class PeliculaController {
 	List<Actor> reparto4 = new ArrayList<>();
 	List<Actor> reparto5 = new ArrayList<>();
 
+	Actor actor1 = new Actor(1, "Leonardo DiCaprio", "Estadounidense");
+	Actor actor2 = new Actor(2, "Penélope Cruz", "Española");
+	Actor actor3 = new Actor(3, "Jackie Chan", "Chino");
+	Actor actor4 = new Actor(4, "Salma Hayek", "Mexicana");
+	Actor actor5 = new Actor(5, "Emma Thompson", "Británica");
+
 	public PeliculaController() {
+
+		reparto1.add(actor1);
+
 		Pelicula pelicula1 = new Pelicula(1, "Titulo1", "director1", LocalDate.of(2021, Month.APRIL, 17), 120,
 				reparto1);
 		Pelicula pelicula2 = new Pelicula(2, "Titulo2", "director2", LocalDate.of(2023, Month.MARCH, 12), 142,
@@ -51,6 +61,17 @@ public class PeliculaController {
 		peliculas.add(pelicula3);
 		peliculas.add(pelicula4);
 		peliculas.add(pelicula5);
+
+		reparto1.add(actor1);
+		reparto1.add(actor2);
+		reparto2.add(actor3);
+		reparto2.add(actor4);
+		reparto3.add(actor5);
+		reparto3.add(actor1);
+		reparto4.add(actor3);
+		reparto4.add(actor2);
+		reparto5.add(actor4);
+		reparto5.add(actor5);
 	}
 
 	// FUNCIONA
@@ -66,70 +87,6 @@ public class PeliculaController {
 			if (pelicula.getTitulo().equalsIgnoreCase(titulo)) {
 				return ResponseEntity.ok(pelicula);
 			}
-		}
-		return ResponseEntity.notFound().build();
-	}
-
-	// FUNCIONA
-	@PostMapping
-	public ResponseEntity<Void> anadirPelicula(@RequestBody Pelicula pelicula) {
-		peliculas.add(pelicula);
-		return ResponseEntity.noContent().build();
-	}
-
-//FUNCIONA
-	@PatchMapping
-	public ResponseEntity<Void> modificarPeliculaParcial(@RequestBody Pelicula mod) {
-		for (Pelicula pelicula : peliculas) {
-			if (pelicula.getId() == mod.getId()) {
-				if (pelicula.getActores() != null) {
-					pelicula.setActores(mod.getActores());
-				}
-				if (pelicula.getDirector() != null) {
-					pelicula.setDirector(mod.getDirector());
-				}
-				if (pelicula.getDuracion() != null) {
-					pelicula.setDuracion(mod.getDuracion());
-				}
-				if (pelicula.getFechaLanzamiento() != null) {
-					pelicula.setDuracion(mod.getDuracion());
-				}
-				if (pelicula.getTitulo() != null) {
-					pelicula.setTitulo(mod.getTitulo());
-				}
-				return ResponseEntity.noContent().build();
-			}
-		}
-		return ResponseEntity.notFound().build();
-	}
-
-	// NO FUNCIONA
-	@PutMapping
-	public ResponseEntity<Pelicula> modificarPeliculaTotal(@RequestBody Pelicula mod) {
-		for (Pelicula pelicula : peliculas) {
-			if (pelicula.getId() == mod.getId()) {
-				// peliculas.set(pelicula, mod) probar esto
-				pelicula.setActores(mod.getActores());
-				pelicula.setDirector(mod.getDirector());
-				pelicula.setDuracion(mod.getDuracion());
-				pelicula.setFechaLanzamiento(mod.getFechaLanzamiento());
-				pelicula.setTitulo(mod.getTitulo());
-			}
-			return ResponseEntity.noContent().build();
-
-		}
-		return ResponseEntity.notFound().build();
-	}
-
-	// FUNCIONA
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> borrarPelicula(@PathVariable Integer id) {
-		for (Pelicula pelicula : peliculas) {
-			if (pelicula.getId() == id) {
-				peliculas.remove(pelicula);
-				return ResponseEntity.noContent().build();
-			}
-
 		}
 		return ResponseEntity.notFound().build();
 	}
@@ -212,4 +169,101 @@ public class PeliculaController {
 		}
 	}
 
+	@GetMapping("/actoresSinRepetir")
+	public ResponseEntity<Set<Actor>> obtenerActoresSinRepetir() {
+		Set<Actor> actores = new HashSet<>();
+		for (Pelicula pelicula : peliculas) {
+			for (Actor actor : pelicula.getActores()) {
+				actores.add(actor);
+			}
+		}
+		if (actores.isEmpty()) {
+			return ResponseEntity.noContent().build();
+		} else {
+
+			return ResponseEntity.ok(actores);
+		}
+	}
+
+	@GetMapping("/nacionalidad/{nacionalidad}")
+	public ResponseEntity<Set<Actor>> obtenerActoresPorNacionalidad(@PathVariable String nacionalidad) {
+		Set<Actor> actores = new HashSet<>();
+		for (Pelicula pelicula : peliculas) {
+			for (Actor actor : pelicula.getActores()) {
+				if (actor.getNacionalidad().equalsIgnoreCase(nacionalidad)) {
+					actores.add(actor);
+				}
+			}
+		}
+		if (actores.isEmpty()) {
+			return ResponseEntity.noContent().build();
+		} else {
+
+			return ResponseEntity.ok(actores);
+		}
+	}
+
+	// FUNCIONA
+	@PostMapping
+	public ResponseEntity<Void> anadirPelicula(@RequestBody Pelicula pelicula) {
+		peliculas.add(pelicula);
+		return ResponseEntity.noContent().build();
+	}
+
+	// FUNCIONA
+	@PatchMapping
+	public ResponseEntity<Void> modificarPeliculaParcial(@RequestBody Pelicula mod) {
+		for (Pelicula pelicula : peliculas) {
+			if (pelicula.getId() == mod.getId()) {
+				if (pelicula.getActores() != null) {
+					pelicula.setActores(mod.getActores());
+				}
+				if (pelicula.getDirector() != null) {
+					pelicula.setDirector(mod.getDirector());
+				}
+				if (pelicula.getDuracion() != null) {
+					pelicula.setDuracion(mod.getDuracion());
+				}
+				if (pelicula.getFechaLanzamiento() != null) {
+					pelicula.setDuracion(mod.getDuracion());
+				}
+				if (pelicula.getTitulo() != null) {
+					pelicula.setTitulo(mod.getTitulo());
+				}
+				return ResponseEntity.noContent().build();
+			}
+		}
+		return ResponseEntity.notFound().build();
+	}
+
+	// NO FUNCIONA
+	@PutMapping
+	public ResponseEntity<Pelicula> modificarPeliculaTotal(@RequestBody Pelicula mod) {
+		for (Pelicula pelicula : peliculas) {
+			if (pelicula.getId() == mod.getId()) {
+				// peliculas.set(pelicula, mod) probar esto
+				pelicula.setActores(mod.getActores());
+				pelicula.setDirector(mod.getDirector());
+				pelicula.setDuracion(mod.getDuracion());
+				pelicula.setFechaLanzamiento(mod.getFechaLanzamiento());
+				pelicula.setTitulo(mod.getTitulo());
+			}
+			return ResponseEntity.noContent().build();
+
+		}
+		return ResponseEntity.notFound().build();
+	}
+
+	// FUNCIONA
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> borrarPelicula(@PathVariable Integer id) {
+		for (Pelicula pelicula : peliculas) {
+			if (pelicula.getId() == id) {
+				peliculas.remove(pelicula);
+				return ResponseEntity.noContent().build();
+			}
+
+		}
+		return ResponseEntity.notFound().build();
+	}
 }
