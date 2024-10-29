@@ -28,5 +28,12 @@
         ?>
     </p>
     <p>Observaciones: <?php echo $_REQUEST["Observaciones"] ?> </p>
+    <p>Imagen guardada correctamente: <br>
+        <?php $archivo = $_FILES['Imagen']
+       // echo '<img src="' . $ruta_destino . '" alt="Imagen subida" style="max-width: 300px;"/>';
+        
+        ?>
+    
+    </p>
 </body>
 </html>
