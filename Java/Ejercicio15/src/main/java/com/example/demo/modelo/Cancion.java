@@ -3,11 +3,11 @@ package com.example.demo.modelo;
 import java.util.List;
 
 public class Cancion {
-	private List<Artista> artistas;
 	private Integer id;
 	private String titulo;
+	private List<Artista> artistas;
 
-	public Cancion(List<Artista> artistas, Integer id, String titulo) {
+	public Cancion(Integer id, List<Artista> artistas, String titulo) {
 		super();
 		this.artistas = artistas;
 		this.id = id;
