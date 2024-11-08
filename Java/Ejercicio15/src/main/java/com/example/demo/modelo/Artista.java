@@ -56,4 +56,9 @@ public class Artista {
 				&& Objects.equals(nombre, other.nombre);
 	}
 
+	@Override
+	public String toString() {
+		return "Artista [id=" + id + ", nombre=" + nombre + ", nacionalidad=" + nacionalidad + "]";
+	}
+
 }

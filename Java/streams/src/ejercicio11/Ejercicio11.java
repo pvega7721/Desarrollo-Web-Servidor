@@ -30,9 +30,22 @@ public class Ejercicio11 {
 		 * sólo por nombre
 		 */
 		cursos.stream().filter(n -> n.getNumVideos() > 50).map(n -> n.getNombre()).forEach(System.out::println);
-		System.out.println("------------------------------------------------------------");
 
-		//Faltan apartados
+		System.out.println("------------------------------------------------------------");
+		System.out.println("Nombre de los 3 cursos con mayor duración");
+		/*
+		 * Sorted ordena por duración, limit coge solo 3 cursos y map mapea por nombres
+		 */
+		cursos.stream().sorted((cur1, cur2) -> Integer.compare(cur2.getDuracion(), cur1.getDuracion())).limit(3)
+				.map(Curso::getNombre).forEach(System.out::println);
+
+		System.out.println("------------------------------------------------------------");
+		Integer duracionTotal = cursos.stream().map(curso -> curso.getDuracion()).reduce(0, (a, b) -> a + b);
+		System.out.println("Duración total de todos los cursos: \n" + duracionTotal);
+
+		System.out.println("------------------------------------------------------------");
+		System.out.println("Nombre y duración de los cursos con menos de 500 alumnos:");
+		cursos.stream().filter(n -> n.getNumAlumnos()<500).forEach(n -> System.out.println(n.getNombre()+":"+n.getDuracion()));
 	}
 
 }

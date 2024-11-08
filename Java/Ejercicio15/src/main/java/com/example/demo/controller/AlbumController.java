@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.http.ResponseEntity;
@@ -125,6 +127,40 @@ public class AlbumController {
 			return ResponseEntity.noContent().build();
 		} else {
 			return ResponseEntity.ok(artistas);
+		}
+	}
+
+	@GetMapping("/artista-y-canciones")
+	public ResponseEntity<Map<Artista, Integer>> mostrarArtistaYCancinoes() {
+		Map<Artista, Integer> artistaYCanciones = new HashMap<>();
+		Integer contador = 0;
+		Integer contador2 = 0;
+		for (Cancion cancion : canciones1) {
+			for (Artista artista : cancion.getArtistas()) {
+				if (artistaYCanciones.containsKey(artista)) {
+					contador = artistaYCanciones.get(artista) + 1;
+					artistaYCanciones.put(artista, contador);
+				} else {
+					artistaYCanciones.put(artista, 1);
+				}
+			}
+		}
+
+		for (Cancion cancion : canciones2) {
+			for (Artista artista : cancion.getArtistas()) {
+				if (artistaYCanciones.containsKey(artista)) {
+					contador2 = artistaYCanciones.get(artista) + 1;
+					artistaYCanciones.put(artista, contador2);
+				} else {
+					artistaYCanciones.put(artista, 1);
+				}
+			}
+		}
+
+		if (artistaYCanciones.isEmpty()) {
+			return ResponseEntity.noContent().build();
+		} else {
+			return ResponseEntity.ok(artistaYCanciones);
 		}
 	}
 
