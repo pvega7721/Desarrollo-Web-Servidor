@@ -25,11 +25,11 @@ public class ClienteController {
 	public ResponseEntity<List<Cliente>> getClientes() {
 		List<Cliente> listaClientes = new ArrayList<>();
 		return ResponseEntity.ok(listaClientes);
+	}
+	/*
+	 * @PostMapping public ResponseEntity<Cliente> insertarCliente(@RequestBody
+	 * Cliente cliente){ servicio.insertarCliente(cliente); return
+	 * ResponseEntity.ok(cliente); }
+	 */
 
-	@PostMapping
-	public ResponseEntity<Cliente> insertarCliente(@RequestBody Cliente cliente){
-		servicio.insertarCliente(cliente);
-		return ResponseEntity.ok(cliente);
-	}
-	}
 }
