@@ -10,7 +10,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 
-@Repository
+@Repository //Indica que la clase es un repositorio JPA
 public class ClienteRepository {
 
 	@PersistenceContext

@@ -16,11 +16,15 @@ public class Cliente {
 	/*
 	 * Column es para indicar que serán las columnas de la tabla. Si el atributo se
 	 * llama igual que el campo de la bdd, no hace falta especificarle el name al
-	 * Column. GeneratedValue indica que el id se generará automáticamente
+	 * Column.
 	 */
 	@Id
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY) /*
+														 * Indica que el id se generará automáticamente. IDENTITY //
+														 * utiliza una columna de la bdd (pk) para generar los valores
+														 * únicos
+														 */
 	private int id;
 	@Column(name = "nombre")
 	private String nombre;

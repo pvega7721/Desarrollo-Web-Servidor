@@ -10,7 +10,7 @@ import com.example.demo.repository.ClienteRepository;
 
 import jakarta.transaction.Transactional;
 
-@Service
+@Service //Indica que esta clase es el servicio
 public class ClienteService {
 
 	@Autowired
@@ -20,7 +20,7 @@ public class ClienteService {
 		return cliente.getClientes();
 	}
 	
-	@Transactional
+	@Transactional //Indica que las operaciones deben estár completas para ejecutarse, en caso de no estarlo, no se ejecutan.
 	public Cliente getCliente(Integer id) {
 		return cliente.getCliente(id);
 	}
