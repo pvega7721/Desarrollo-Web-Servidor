@@ -23,6 +23,17 @@ public class ClienteRepository {
 		List<Cliente> lista = query.getResultList();
 		return lista;
 	}
+	
+	//Booleano para comprobar que el objeto exista en la bbdd
+	public Boolean borrarCliente(int id){
+		//obtiene el cliente usando el propio método de la clase
+		Cliente cliente = getCliente(id);
+		if(cliente != null) {
+			entityManager.remove(cliente);
+			return true;
+		}
+		return false;
+	}
 
 	public Cliente getCliente(int id) {
 		Cliente cliente = entityManager.find(Cliente.class, id);

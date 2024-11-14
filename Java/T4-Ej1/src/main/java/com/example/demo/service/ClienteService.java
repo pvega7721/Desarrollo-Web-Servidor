@@ -28,13 +28,18 @@ public class ClienteService {
 	}
 
 	@Transactional
-	public Cliente insertarCliente(Cliente c) {
-		return cliente.insertarCliente(c);
+	public List<Cliente> getClienteNombre(String nombre) {
+		return cliente.getClienteNombre(nombre);
 	}
 
 	@Transactional
-	public List<Cliente> getClienteNombre(String nombre) {
-		return cliente.getClienteNombre(nombre);
+	public Cliente insertarCliente(Cliente c) {
+		return cliente.insertarCliente(c);
+	}
+	
+	@Transactional
+	public boolean borrarCliente(int id) {
+		return cliente.borrarCliente(id);
 	}
 
 }
