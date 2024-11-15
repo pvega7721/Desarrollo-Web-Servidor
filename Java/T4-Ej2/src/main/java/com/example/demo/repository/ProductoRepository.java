@@ -32,4 +32,18 @@ public class ProductoRepository {
 		return producto;
 	}
 
+	public Boolean borrarProducto(int id) {
+		Producto producto = getProducto(id);
+		if (producto == null) {
+			return false;
+		}
+		entityManager.remove(producto);
+		return true;
+	}
+
+	public Producto actualizarProducto(Producto producto) {
+		return entityManager.merge(producto);
+
+	}
+
 }

@@ -29,4 +29,14 @@ public class ProductoService {
 	public Producto insertarProducto(Producto p) {
 		return producto.insertarProducto(p);
 	}
+	
+	@Transactional
+	public Boolean borrarProducto(int id) {
+		return producto.borrarProducto(id);
+	}
+	
+	@Transactional
+	public Producto actualizarProducto(Producto p) {
+		return producto.actualizarProducto(p);
+	}
 }
