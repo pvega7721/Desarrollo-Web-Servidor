@@ -43,13 +43,13 @@ public class ProductoController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Void> insertarCliente(@RequestBody Producto p) {
+	public ResponseEntity<Void> insertarProducto(@RequestBody Producto p) {
 		servicio.insertarProducto(p);
 		return ResponseEntity.noContent().build();
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> borrarCliente(@PathVariable int id) {
+	public ResponseEntity<Void> borrarProducto(@PathVariable int id) {
 		if (servicio.borrarProducto(id)) {
 			return ResponseEntity.noContent().build();
 		}
@@ -57,8 +57,8 @@ public class ProductoController {
 		return ResponseEntity.notFound().build();
 	}
 
-	@PutMapping
-	public ResponseEntity<Producto> acutalizarCliente(@PathVariable int id, @RequestBody Producto p) {
+	@PutMapping("/{id}")
+	public ResponseEntity<Producto> acutalizarProducto(@PathVariable int id, @RequestBody Producto p) {
 		p.setId(id);
 		Producto productoCambiado = servicio.actualizarProducto(p);
 		if (productoCambiado != null) {
@@ -69,7 +69,7 @@ public class ProductoController {
 	}
 
 	@PatchMapping("/{id}")
-	public ResponseEntity<Producto> actualizarClienteParcial(@PathVariable int id, @RequestBody Producto p) {
+	public ResponseEntity<Producto> actualizarProductoParcial(@PathVariable int id, @RequestBody Producto p) {
 		Producto productoActual = servicio.getProducto(id);
 		// Comprueba que el producto exista
 		if (productoActual == null) {
