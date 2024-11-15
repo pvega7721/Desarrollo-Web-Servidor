@@ -17,7 +17,8 @@ public class ClienteRepository {
 	private EntityManager entityManager; // Conecta la bbdd con Java, permite realizar operaciones en la bbdd
 
 	public List<Cliente> getClientes() {
-		// crea la query para obtener los clientes
+		// crea la query para obtener los clientes. En la consulta el nombre de la tabla
+		// es el de la clase, no el de BBDD
 		Query query = (Query) entityManager.createQuery("select c from Cliente c", Cliente.class);
 		// guarda en una lista de clientes lo que devuelva la query
 		List<Cliente> lista = query.getResultList();
@@ -50,12 +51,11 @@ public class ClienteRepository {
 
 	public Cliente insertarCliente(Cliente cliente) {
 		entityManager.persist(cliente);
-		System.out.println(cliente);
 		return cliente;
 	}
-	
+
 	public Cliente actualizarCliente(Cliente cliente) {
-		//merge actualiza en bbdd
+		// merge actualiza en bbdd
 		return entityManager.merge(cliente);
 	}
 
