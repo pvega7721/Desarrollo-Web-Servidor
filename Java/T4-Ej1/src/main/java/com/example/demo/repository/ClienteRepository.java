@@ -23,26 +23,9 @@ public class ClienteRepository {
 		List<Cliente> lista = query.getResultList();
 		return lista;
 	}
-	
-	//Booleano para comprobar que el objeto exista en la bbdd
-	public Boolean borrarCliente(int id){
-		//obtiene el cliente usando el propio método de la clase
-		Cliente cliente = getCliente(id);
-		if(cliente != null) {
-			entityManager.remove(cliente);
-			return true;
-		}
-		return false;
-	}
 
 	public Cliente getCliente(int id) {
 		Cliente cliente = entityManager.find(Cliente.class, id);
-		return cliente;
-	}
-
-	public Cliente insertarCliente(Cliente cliente) {
-		entityManager.persist(cliente);
-		System.out.println(cliente);
 		return cliente;
 	}
 
@@ -53,7 +36,27 @@ public class ClienteRepository {
 		List<Cliente> nombresClientes = query.getResultList();
 		return nombresClientes;
 	}
+
+	// Booleano para comprobar que el objeto exista en la bbdd
+	public Boolean borrarCliente(int id) {
+		// obtiene el cliente usando el propio método de la clase
+		Cliente cliente = getCliente(id);
+		if (cliente != null) {
+			entityManager.remove(cliente);
+			return true;
+		}
+		return false;
+	}
+
+	public Cliente insertarCliente(Cliente cliente) {
+		entityManager.persist(cliente);
+		System.out.println(cliente);
+		return cliente;
+	}
 	
-	
+	public Cliente actualizarCliente(Cliente cliente) {
+		//merge actualiza en bbdd
+		return entityManager.merge(cliente);
+	}
 
 }

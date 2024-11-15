@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -56,11 +57,37 @@ public class ClienteController {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
-	@PutMapping
-	public ResponseEntity<Cliente> modificarCliente(@RequestBody Cliente cliente){
-		
+
+	@PutMapping("/{id}")
+	public ResponseEntity<Cliente> modificarCliente(@PathVariable int id, @RequestBody Cliente cliente) {
+		// Asegura que el ID coincida con el cliente que se va a actualizar
+		cliente.setId(id);
+		Cliente clienteCambiado = servicio.acualizarCliente(cliente);
+		if (clienteCambiado != null) {
+			return ResponseEntity.ok(clienteCambiado);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
 	}
-	
-	
+
+	// este no necesita estar en el resto de clases ya que sólo accede a bbdd usando
+	// el resto de métodos
+	@PatchMapping("/{id}")
+	public ResponseEntity<Cliente> modificarClienteParcial(@PathVariable int id, @RequestBody Cliente cliente) {
+		// Comprueba que el cliente actual exista.
+		Cliente clienteActual = servicio.getCliente(id);
+		if (clienteActual == null) {
+			return ResponseEntity.notFound().build();
+		}
+		// Actualiza los campos proporcionados
+		if (cliente.getNombre() != null) {
+			clienteActual.setNombre(cliente.getNombre());
+		}
+		if (cliente.getApellidos() != null) {
+			clienteActual.setApellidos(cliente.getApellidos());
+		}
+		// devuelve el nuevo cliente
+		return ResponseEntity.ok(servicio.acualizarCliente(clienteActual));
+	}
+
 }

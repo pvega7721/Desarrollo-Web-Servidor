@@ -13,6 +13,7 @@ import jakarta.transaction.Transactional;
 @Service // Indica que esta clase es el servicio
 public class ClienteService {
 
+	//Instancia de la clase repository para llamar a sus métodos
 	@Autowired
 	private ClienteRepository cliente;
 
@@ -40,6 +41,11 @@ public class ClienteService {
 	@Transactional
 	public boolean borrarCliente(int id) {
 		return cliente.borrarCliente(id);
+	}
+	
+	@Transactional
+	public Cliente acualizarCliente(Cliente c) {
+		return cliente.actualizarCliente(c);
 	}
 
 }
