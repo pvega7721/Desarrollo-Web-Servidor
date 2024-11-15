@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -65,6 +66,23 @@ public class ProductoController {
 		}
 		return ResponseEntity.notFound().build();
 
+	}
+
+	@PatchMapping("/{id}")
+	public ResponseEntity<Producto> actualizarClienteParcial(@PathVariable int id, @RequestBody Producto p) {
+		Producto productoActual = servicio.getProducto(id);
+		// Comprueba que el producto exista
+		if (productoActual == null) {
+			return ResponseEntity.notFound().build();
+		}
+		// Actualiza los campos proporcionados
+		if (p.getNombre() != null) {
+			productoActual.setNombre(p.getNombre());
+		}
+		if (p.getPrecio() != null) {
+			productoActual.setPrecio(p.getPrecio());
+		}
+		return ResponseEntity.ok(servicio.actualizarProducto(productoActual));
 	}
 
 }
