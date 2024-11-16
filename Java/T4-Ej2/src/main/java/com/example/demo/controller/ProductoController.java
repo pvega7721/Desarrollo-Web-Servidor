@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,8 @@ public class ProductoController {
 	@GetMapping
 	public ResponseEntity<List<Producto>> getProductos() {
 		List<Producto> productos = servicio.getProductos();
+	
+		
 		if (productos.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
@@ -41,10 +44,59 @@ public class ProductoController {
 		}
 		return ResponseEntity.ok(producto);
 	}
-
+	
+	@GetMapping("/nombre/{nombre}")
+	public ResponseEntity<List<Producto>> getProductosNombre(@PathVariable String nombre){
+		List<Producto> productos = servicio.getProductos();
+		List<Producto> productosMismoNombre = new ArrayList<>();
+		for (Producto producto : productos) {
+			if(producto.getNombre().equals(nombre)) {
+				productosMismoNombre.add(producto);
+			}
+		}
+		
+		if(productosMismoNombre.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(productosMismoNombre);
+	}
+	
+	@GetMapping("/rango/{precio1}-{precio2}")
+	public ResponseEntity<List<Producto>> getProductosEntre(@PathVariable double precio1, @PathVariable double precio2){
+		List<Producto> productos = servicio.getProductos();
+		List<Producto> productosEntreRango = new ArrayList<>();
+		for (Producto producto : productos) {
+			if(producto.getPrecio() > precio1 && producto.getPrecio() < precio2) {
+				productosEntreRango.add(producto);
+			}
+		}
+		
+		if(productosEntreRango.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(productosEntreRango);
+	}
+	
 	@PostMapping
 	public ResponseEntity<Void> insertarProducto(@RequestBody Producto p) {
 		servicio.insertarProducto(p);
+		return ResponseEntity.noContent().build();
+	}
+	
+	@PostMapping("/insertarLista")
+	public ResponseEntity<Void> insertarListaProductos(@RequestBody List<Producto> productos){
+		List<Producto> listaProductos = servicio.getProductos();
+		for (Producto producto : listaProductos) {
+			for (Producto producto2 : productos) {
+				if(producto.getId() == producto2.getId()) {
+					//Si el producto ya existe se actualiza
+					servicio.actualizarProducto(producto2);
+				}else {
+					//Si es nuevo se inserta
+					servicio.insertarProducto(producto2);
+				}
+			}
+		}
 		return ResponseEntity.noContent().build();
 	}
 
