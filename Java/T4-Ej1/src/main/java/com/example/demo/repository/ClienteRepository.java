@@ -54,6 +54,7 @@ public class ClienteRepository {
 	}
 
 	public Cliente insertarCliente(Cliente cliente) {
+		// persist inserta en la bbdd
 		entityManager.persist(cliente);
 		return cliente;
 	}

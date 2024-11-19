@@ -15,8 +15,7 @@ import jakarta.persistence.Table;
 public class Cliente {
 	/*
 	 * Column es para indicar que serán las columnas de la tabla. Si el atributo se
-	 * llama igual que el campo de la bdd, no hace falta especificarle el name al
-	 * Column.
+	 * llama igual que el campo de la bdd.
 	 */
 	@Id
 	@Column(name = "id")
