@@ -4,7 +4,7 @@ session_start();
 if (!isset($_SESSION['agenda'])) {
     $_SESSION['agenda'] = array();
 }
-$agenda = $_SESSION['agenda'];
+$agenda = $_SESSION['agenda'];//guarda en la variable local los datos de la sesión
 
 $nombre = $_POST['nombre'];
 $telefono = $_POST['telefono'];
@@ -13,7 +13,7 @@ $telefono = $_POST['telefono'];
 //si faltan datos, se mostrará un mensaje indicándolo
 if($nombre == "" && $telefono == ""){
     echo "<p class= 'error'>No ha introducido datos</p>";
-
+    
 }elseif($nombre == ""){
     echo "<p class= 'error'>Falta el nombre</p>";
 

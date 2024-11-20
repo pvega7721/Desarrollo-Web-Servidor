@@ -34,6 +34,7 @@
             $altura = floatval($altura);
             //paso la altura a metros
             $altura = $altura /100;
+            //Hago los cálculos y según el resultado se le muestra un mensaje al usuario
             $imc = $peso/ ($altura*$altura);
             if($imc < 18.5){
                 echo "Tu imc es de: ". round($imc,2). ". Tienes bajo peso";

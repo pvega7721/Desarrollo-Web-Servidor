@@ -13,9 +13,12 @@
             <tr>
 
         <?php
-            session_start();
-            $_SESSION["tamanyo"] = $_POST["tamanyo"];
+            session_start(); //Recupera la sesión que creamos en el primer php
+            //guardamos el tamaño de la tabla en la sesión y en la variable local
+            $_SESSION["tamanyo"] = $_POST["tamanyo"]; 
             $tamanyo = $_SESSION["tamanyo"];
+
+            //bucle que crea los checkboxes
             for ($i = 1; $i <= $tamanyo; $i++) {
                 echo "<td><input type='checkbox' name='checkboxes[]' value='$i'> $i</td>";
             }

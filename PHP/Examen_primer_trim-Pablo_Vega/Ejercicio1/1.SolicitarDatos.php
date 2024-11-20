@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    session_start(); //inicia Session para compartir datos entre las páginas
 ?>
 
 <!DOCTYPE html>
