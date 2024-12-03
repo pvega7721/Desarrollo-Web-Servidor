@@ -15,7 +15,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 
 @Repository // Indica que la clase es un repositorio JPA
-public class ClienteRepository {
+public class ClienteRepository implements ClienteRepositoryInterface{
 
 	@PersistenceContext // o Autowired, permite utilziar EntityManager
 	private EntityManager entityManager; // Conecta la bbdd con Java, permite realizar operaciones en la bbdd
