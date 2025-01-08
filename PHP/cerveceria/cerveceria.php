@@ -24,7 +24,7 @@
     <p>Introduzca los datos de las Cervecerías</p>
 
     <form action="mostrarDatos.php" method="post" enctype="multipart/form-data">
-        <label for="tipoCerveza" id="titulo" >Tipo de Cerveza:</label>
+        <label for="tipoCerveza" class="titulo">Tipo de Cerveza:</label>
         <select name="tipoCerveza" id="tipoCerveza">
             <option value="Lager">Lager</option>
             <option value="Pale Lager">Pale Lager</option>
@@ -44,7 +44,7 @@
             <option value="Witbier">Witbier</option>
         </select>
         <br><br>
-        <label for="Denominación"id="titulo">Denominación del alimento:</label>
+        <label for="Denominación" class="titulo">Denominación del alimento:</label>
         <select name="Denominación" id="Denominación">
             <option value="Lata 33cl">Lata 33cl</option>
             <option value="Tercio">Tercio</option>
@@ -54,7 +54,7 @@
         </select>
         <br><br>
 
-        <label id="titulo">Tipo de Embase: </label> 
+        <label class="titulo">Tipo de Embase: </label> 
         <input type="radio" name="embase" id="botellin" value="botellin">
         <label for="botellin">botellin</label>
 
@@ -71,7 +71,7 @@
         <label for="Lata">Lata</label>
         <br><br>
 
-        <label for="CantidadNeta" id="titulo">Cantidad neta:</label>
+        <label for="CantidadNeta" class="titulo">Cantidad neta:</label>
         <select name="CantidadNeta" id="Denominación">
             <option value="25cl">25cl</option>
             <option value="33cl">33cl</option>
@@ -82,19 +82,19 @@
         </select>
         <br><br>
 
-        <label for="marcaProducto" id="titulo">Marca del Producto:</label>
+        <label for="marcaProducto" class="titulo">Marca del Producto:</label>
         <input type="text" id="marcaProducto" name="marcaProducto">
         <br><br>
 
-        <label for="abusoConsumo" id="titulo" name="abusoConsumo">Advertencia sobre el abuso en el consumo de alcohol:</label>
+        <label for="abusoConsumo" class="titulo" name="abusoConsumo">Advertencia sobre el abuso en el consumo de alcohol:</label>
         <input type="text" id="abusoConsumo" name="abusoConsumo">
         <br><br>
         
-        <label for="fechaConsumo" id="titulo" name="fechaConsumo">Fecha de Consumo Preferente:</label>
+        <label for="fechaConsumo" class="titulo" name="fechaConsumo">Fecha de Consumo Preferente:</label>
         <input type="date" name="fechaConsumo" id="fechaConsumo">
         <br><br>
 
-        <label for="alergenos[]" id="titulo" name="alergenos[]">Indicar sustancias que pueden causar alergias:</label>
+        <label for="alergenos[]" class="titulo" name="alergenos[]">Indicar sustancias que pueden causar alergias:</label>
         <input type="checkbox" name="alergenos[]" id="Gluten" value="Gluten">
         <label for="Gluten">Gluten</label>
 
@@ -120,7 +120,7 @@
         <label for="Sin Alergenos">Sin Alergenos</label>
         <br><br>
 
-        <label for="Observaciones" id="titulo" name="Observaciones">Observaciones</label>
+        <label for="Observaciones" class="titulo" name="Observaciones">Observaciones</label>
         <textarea rows="4" cols="50" name="Observaciones"></textarea>
         <br><br>   
 
