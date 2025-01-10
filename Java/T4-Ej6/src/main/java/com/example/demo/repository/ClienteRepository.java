@@ -9,7 +9,9 @@ import com.example.demo.modelo.Cliente;
 @Repository
 public class ClienteRepository {
 
-	List<Cliente> findAll();
+	List<Cliente> findAll(){
+		Query<> 
+	}
 	
 	Cliente findBy(Integer id);
 	
