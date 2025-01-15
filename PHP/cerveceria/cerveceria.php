@@ -21,54 +21,48 @@
 </head>
 <body>
     <h1>Inserción de Cervezas</h1>
-    <p>Introduzca los datos de las Cervecerías</p>
+    <p>Introduzca los datos de la Cerveza</p>
 
     <form action="mostrarDatos.php" method="post" enctype="multipart/form-data">
-        <label for="tipoCerveza" class="titulo">Tipo de Cerveza:</label>
-        <select name="tipoCerveza" id="tipoCerveza">
-            <option value="Lager">Lager</option>
-            <option value="Pale Lager">Pale Lager</option>
-            <option value="Marzen">Marzen</option>
-            <option value="Bock">Bock</option>
-            <option value="American Lager">American Lager</option>
-            <option value="Ale">Ale</option>
-            <option value="Pale Ale">Pale Ale</option>
-            <option value="IPA">IPA</option>
-            <option value="Bitter">Bitter</option>
-            <option value="Brown Ale">Brown Ale</option>
-            <option value="Porter">Porter</option>
-            <option value="Stout">Stout</option>
-            <option value="Trapenses">Trapenses</option>
-            <option value="Abadia">Abadia</option>
-            <option value="Weisbier">Weisbier</option>
-            <option value="Witbier">Witbier</option>
-        </select>
-        <br><br>
-        <label for="Denominación" class="titulo">Denominación del alimento:</label>
-        <select name="Denominación" id="Denominación">
-            <option value="Lata 33cl">Lata 33cl</option>
-            <option value="Tercio">Tercio</option>
-            <option value="Botellin">Botellin</option>
-            <option value="Medio Litro">Medio Litro</option>
-            <option value="Litro">Litro</option>
-        </select>
-        <br><br>
 
-        <label class="titulo">Tipo de Embase: </label> 
+        <label for="denominacion" class=titulo>Denominación cerveza:</label>
+        <input type="text" id="denominacion" name ="denominacion"><br><br>
+
+        <label for="marca" class="titulo" >Marca:</label>
+        <select name="marca" id="marca">
+            <option value="Heiniken">Heiniken</option>
+            <option value="Mahou">Mahou</option>
+            <option value="DAM">DAM</option>
+            <option value="Estrella Galicia">Estrella Galicia</option>
+            <option value="Alhambra">Alhambra</option>
+            <option value="Cruzcampo">Cruzcampo</option>
+            <option value="Artesana">Artesana</option>
+        </select>
+        <br><br>
+        <label for="formato" class="titulo">Formato:</label>
+        <select name="formato" id="formato">
+            <option value="Lata">Lata</option>
+            <option value="Botella">Botella</option>
+            <option value="Pack">Pack</option>
+        </select>
+        <br><br>
+        
+        <label class="titulo">Tamaño: </label> 
+
         <input type="radio" name="embase" id="botellin" value="botellin">
-        <label for="botellin">botellin</label>
+        <label for="botellin">Botellín</label>
 
         <input type="radio" name="embase" id="tercio" value="tercio">
-        <label for="tercio">tercio</label>
+        <label for="tercio">Tercio</label>
 
         <input type="radio" name="embase" id="medioLitro" value="medioLitro">
-        <label for="medioLitro">1/2 Litro</label>
+        <label for="medioLitro">Media</label>
         
         <input type="radio" name="embase" id="Litro" value="Litro">
-        <label for="Litro">Litro</label>
+        <label for="Litro">Litrona</label>
 
         <input type="radio" name="embase" id="Lata" value="Lata">
-        <label for="Lata">Lata</label>
+        <label for="pack">Pack</label>
         <br><br>
 
         <label for="CantidadNeta" class="titulo">Cantidad neta:</label>
