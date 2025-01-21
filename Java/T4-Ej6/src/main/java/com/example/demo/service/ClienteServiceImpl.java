@@ -1,5 +1,5 @@
-package cambiarTexto()com.example.demo.service;
+package com.example.demo.service;
 
-public class ClienteServiceInterface {
+public class ClienteServiceImpl {
 
 }
