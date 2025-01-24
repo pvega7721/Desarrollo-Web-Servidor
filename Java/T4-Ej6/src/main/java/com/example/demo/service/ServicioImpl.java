@@ -9,6 +9,8 @@ import com.example.demo.modelo.Cliente;
 import com.example.demo.modelo.Direccion;
 import com.example.demo.repository.Repositorio;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class ServicioImpl implements Servicio {
 
@@ -17,54 +19,90 @@ public class ServicioImpl implements Servicio {
 
 	@Override
 	public List<Cliente> getClientes() {
-		// TODO Auto-generated method stub
-		return null;
+		return repo.getClientes();
 	}
 
 	@Override
 	public Cliente getCliente(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		return repo.getCliente(id);
 	}
 
-	@Override
+	@Transactional
 	public void insertarCliente(Cliente c) {
-		// TODO Auto-generated method stub
+		repo.insertarCliente(c);
+	}
 
+	@Transactional
+	public Cliente actualizarCliente(Cliente c, Direccion nueva) {
+		/*
+		 * Busca el cliente por id. Si existe y la nueva direccion no es null, actualiza
+		 * la dirección y guarda los cambios.
+		 */
+		Cliente cliente = repo.getCliente(c.getId());
+		if (cliente != null) {
+			if (nueva != null) {
+				nueva.setId(cliente.getDireccion().getId());
+				cliente.setDireccion(nueva);
+				repo.insertarCliente(cliente);
+				return cliente;
+			}
+		}
+		return null; // si el cliente no existe o la direccion es null, devuelve null
+	}
+
+	@Transactional
+	public boolean eliminarCliente(Integer id) {
+		return repo.borrarCliente(id);
+	}
+
+	@Transactional
+	public Cliente actualizarDireccion(Integer id, Direccion d) {
+		/*
+		 * Busca el cliente por id. Si existe y la direccion no es null, actualiza la
+		 * dirección y guarda los cambios.
+		 */
+		Cliente cliente = repo.getCliente(id);
+		if (cliente != null) {
+			if (d != null) {
+				d.setId(cliente.getDireccion().getId());
+				cliente.setDireccion(d);
+				repo.actualizarCliente(cliente);
+				return cliente;
+			}
+		}
+		return null;// si el cliente no existe o la direccion es null, devuelve null
+	}
+
+	@Transactional
+	public void actualizarSevilla() {
+		List<Cliente> clientes = repo.buscarA();
+		for (Cliente cliente : clientes) {
+			if (cliente.getDireccion() != null) {
+				cliente.getDireccion().setCiudad("Sevilla");
+				repo.actualizarCliente(cliente);
+			}
+		}
+
+	}
+
+	@Transactional
+	public void actualizarCiudadNombre(String ciudad, String letra) {
+		List<Cliente> clientes = repo.buscarNombresPorLetra(letra);
+		for (Cliente cliente : clientes) {
+			if (cliente.getDireccion() != null) {
+				cliente.getDireccion().setCiudad(ciudad);
+				repo.actualizarCliente(cliente);
+			}
+		}
+	}
+
+	@Transactional
+	public List<Cliente> getClientesPorCiudad(String ciudad) {
+		return repo.buscarPorCiudad(ciudad);
 	}
 
 	@Override
 	public Cliente actualizarCliente(Cliente c) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean eliminarCliente(Integer id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Cliente actualizarDireccion(Integer id, Direccion d) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void actualizarSevilla() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void actualizarCiudadNombre(String ciudad, String nombre) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public List<Cliente> getClientesPorCiudad(String ciudad) {
 		// TODO Auto-generated method stub
 		return null;
 	}
