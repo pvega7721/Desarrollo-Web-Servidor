@@ -13,6 +13,7 @@
             border: 1px solid;
             padding: 5px;
             margin-right: 40%;
+            width: 80%;
         }
         .titulo{
             font-weight: bold;
@@ -21,7 +22,7 @@
 </head>
 <body>
     <h1>Inserción de Cervezas</h1>
-    <p>Introduzca los datos de la Cerveza</p>
+    <p>Introduzca los datos de la Cerveza:</p>
 
     <form action="mostrarDatos.php" method="post" enctype="multipart/form-data">
 
@@ -38,57 +39,49 @@
             <option value="Cruzcampo">Cruzcampo</option>
             <option value="Artesana">Artesana</option>
         </select>
+
+        <br><br>        
+        
+        <label for="tipo" class="titulo">Tipo de cerveza:</label>
+
+        <input type="radio" name="tipo" id="larger" value="larger">
+        <label for="larger">LARGER</label>
+
+        <input type="radio" name="tipo" id="paleale" value="paleale">
+        <label for="paleale">PALE ALE</label>
+        
+        <input type="radio" name="tipo" id="cerveza_negra" value="cerveza_negra">
+        <label for="cerveza_negra">CERVEZA NEGRA</label>
+        
+        <input type="radio" name="tipo" id="abadia" value="abadia">
+        <label for="abadia">ABADIA</label>
+        
+        <input type="radio" name="tipo" id="rubia" value="rubia">
+        <label for="rubia">RUBIA</label>
+
         <br><br>
+
         <label for="formato" class="titulo">Formato:</label>
         <select name="formato" id="formato">
             <option value="Lata">Lata</option>
             <option value="Botella">Botella</option>
             <option value="Pack">Pack</option>
         </select>
+        
         <br><br>
         
-        <label class="titulo">Tamaño: </label> 
-
-        <input type="radio" name="embase" id="botellin" value="botellin">
-        <label for="botellin">Botellín</label>
-
-        <input type="radio" name="embase" id="tercio" value="tercio">
-        <label for="tercio">Tercio</label>
-
-        <input type="radio" name="embase" id="medioLitro" value="medioLitro">
-        <label for="medioLitro">Media</label>
-        
-        <input type="radio" name="embase" id="Litro" value="Litro">
-        <label for="Litro">Litrona</label>
-
-        <input type="radio" name="embase" id="Lata" value="Lata">
-        <label for="pack">Pack</label>
-        <br><br>
-
-        <label for="CantidadNeta" class="titulo">Cantidad neta:</label>
-        <select name="CantidadNeta" id="Denominación">
-            <option value="25cl">25cl</option>
-            <option value="33cl">33cl</option>
-            <option value="1 Litro">1 Litro</option>
-            <option value="1/2 Litro">1/2 Litro</option>
-            <option value="2 Litros">2 Litros</option>
-            <option value="Barril 25 Litros">Barril 25 Litros</option>
+        <label for="embase" class="titulo">Tamaño: </label>
+        <select name="embase" id="embase">
+            <option value="botellin">Botellín</option>
+            <option value="tercio">Tercio</option>
+            <option value="medioLitro">Media</option>
+            <option value="Litro">Litrona</option>
+            <option value="Lata">Pack</option>
         </select>
-        <br><br>
-
-        <label for="marcaProducto" class="titulo">Marca del Producto:</label>
-        <input type="text" id="marcaProducto" name="marcaProducto">
-        <br><br>
-
-        <label for="abusoConsumo" class="titulo" name="abusoConsumo">Advertencia sobre el abuso en el consumo de alcohol:</label>
-        <input type="text" id="abusoConsumo" name="abusoConsumo">
-        <br><br>
         
-        <label for="fechaConsumo" class="titulo" name="fechaConsumo">Fecha de Consumo Preferente:</label>
-        <input type="date" name="fechaConsumo" id="fechaConsumo">
         <br><br>
 
-        <label for="alergenos[]" class="titulo" name="alergenos[]">Indicar sustancias que pueden causar alergias:</label>
+        <label for="alergenos[]" class="titulo" name="alergenos[]">Alérgenos:</label>
         <input type="checkbox" name="alergenos[]" id="Gluten" value="Gluten">
         <label for="Gluten">Gluten</label>
 
@@ -107,20 +100,27 @@
         <input type="checkbox" name="alergenos[]" id="Sulfitos" value="Sulfitos">
         <label for="Sulfitos">Sulfitos</label>
 
-        <input type="checkbox" name="alergenos[]" id="Frutos Con Cascara" value="Frutos Con Cascara">
-        <label for="Frutos Con Cascara">Frutos Con Cascara</label>
-
         <input type="checkbox" name="alergenos[]" id="Sin Alergenos" value="Sin Alergenos">
         <label for="Sin Alergenos">Sin Alergenos</label>
+        <br><br>
+        
+        <label for="fechaConsumo" class="titulo" name="fechaConsumo">Fecha Consumo: </label>
+        <input type="date" name="fechaConsumo" id="fechaConsumo">
+        <br><br>
+        
+        <label for="Imagen" id="Imagen" class="titulo" name="Imagen">Fotos</label>
+        <input type="file" name="Imagen"/>
+        <br><br>
+
+        <label for="precio" class="titulo">Precio: </label>
+        <input type="text">€
+        
         <br><br>
 
         <label for="Observaciones" class="titulo" name="Observaciones">Observaciones</label>
         <textarea rows="4" cols="50" name="Observaciones"></textarea>
         <br><br>   
 
-        <label for="Imagen" id="Imagen" name="Imagen">Inserta una imagen</label>
-        <input type="file" name="Imagen"/>
-        <br><br>   
 
         <input type="submit" value="Insertar Cerveza">
     </form>
