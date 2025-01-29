@@ -6,17 +6,17 @@
     <title>Datos recogidos</title>
 </head>
 <body>
-    <p>DENOMINACIÓN CERVEZA: <?php echo $_REQUEST["tipoCerveza"] ?> </p>
-    <p>MARCA : <?php echo $_REQUEST["Denominación"] ?> </p>
-    <p>TIPO CERVEZA: <?php echo $_REQUEST["embase"] ?> </p>
-    <p>FORMATO: <?php echo $_REQUEST["CantidadNeta"] ?> </p>
-    <p>TAMAÑO: <?php echo $_REQUEST["marcaProducto"] ?> </p>
+    <p>DENOMINACIÓN CERVEZA: <?php echo $_SESSION["tipoCerveza"] ?> </p>
+    <p>MARCA : <?php echo $_SESSION["Denominación"] ?> </p>
+    <p>TIPO CERVEZA: <?php echo $_SESSION["embase"] ?> </p>
+    <p>FORMATO: <?php echo $_SESSION["CantidadNeta"] ?> </p>
+    <p>TAMAÑO: <?php echo $_SESSION["marcaProducto"] ?> </p>
     <p>
         ALERGENOS: 
         <?php
         print("<ul>");
-        if(!empty($_REQUEST['alergenos'])){
-            foreach ($_REQUEST['alergenos'] as $alergeno){
+        if(!empty($_SESSION['alergenos'])){
+            foreach ($_SESSION['alergenos'] as $alergeno){
                 print("<li>".$alergeno."</li>");
                 }
         print("</ul>");
@@ -25,8 +25,8 @@
         }        
         ?>
     </p>
-    <p>FECHA CONSUMO: <?php echo $_REQUEST["fechaConsumo"] ?> </p>
-    <p>PRECIO: <?php echo $_REQUEST["abusoConsumo"] ?> </p>
+    <p>FECHA CONSUMO: <?php echo $_SESSION["fechaConsumo"] ?> </p>
+    <p>PRECIO: <?php echo $_SESSION["abusoConsumo"] ?> </p>
     <p>Imagen guardada correctamente: <br>
         <?php $archivo = $_FILES['Imagen']
        // echo '<img src="' . $ruta_destino . '" alt="Imagen subida" style="max-width: 300px;"/>';
@@ -34,6 +34,6 @@
         ?>
     
     </p>
-    <p>Observaciones: <?php echo $_REQUEST["Observaciones"] ?> </p>
+    <p>Observaciones: <?php echo $_SESSION["Observaciones"] ?> </p>
 </body>
 </html>

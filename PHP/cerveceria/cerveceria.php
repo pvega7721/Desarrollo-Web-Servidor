@@ -1,3 +1,27 @@
+<?php
+session_start();
+$_SESSION["fallo"] = false;
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (empty($_POST['denominacion']) || empty($_POST['tipo']) || empty($_POST['fechaConsumo']) || empty($_POST['precio']) || !is_numeric($_POST['precio'])) {
+        $_SESSION["fallo"] = true;
+    } else {
+        $_SESSION['denominacion'] = $_POST['denominacion'];
+        $_SESSION['marca'] = $_POST['marca'];
+        $_SESSION['tipo'] = $_POST['tipo'];
+        $_SESSION['formato'] = $_POST['formato'];
+        $_SESSION['embase'] = $_POST['embase'];
+        $_SESSION['alergenos'] = $_POST['alergenos'] ?? []; //las ?? hace que si no hay nada en alergenos, se envíe un array vacío
+        $_SESSION['fechaConsumo'] = $_POST['fechaConsumo'];
+        $_SESSION['precio'] = $_POST['precio'];
+        $_SESSION['observaciones'] = $_POST['Observaciones'] ?? ''; //las ?? hace que si no hay nada en observaciones, se envíe un string vacío
+    
+        header("Location: mostrarDatos.php");
+        exit();
+}
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -18,17 +42,25 @@
         .titulo{
             font-weight: bold;
         }
+        .error{
+            color: red;
+        }
     </style>
 </head>
 <body>
     <h1>Inserción de Cervezas</h1>
     <p>Introduzca los datos de la Cerveza:</p>
 
-    <form action="mostrarDatos.php" method="post" enctype="multipart/form-data">
+    <form action="" method="post" enctype="multipart/form-data">
 
         <label for="denominacion" class=titulo>Denominación cerveza:</label>
         <input type="text" id="denominacion" name ="denominacion"><br><br>
 
+        <?php if(isset($_POST['denominacion']) && empty($_POST['denominacion'])){
+            $_SESSION["fallo"] = true;
+            echo "<p class='error'>¡Se requiere el nombre de la Cerveza!</p>";
+        }
+        ?>
         <label for="marca" class="titulo" >Marca:</label>
         <select name="marca" id="marca">
             <option value="Heiniken">Heiniken</option>
@@ -58,6 +90,13 @@
         
         <input type="radio" name="tipo" id="rubia" value="rubia">
         <label for="rubia">RUBIA</label>
+        <?php 
+
+            if (!isset($_POST['tipo'])) {
+                $_SESSION["fallo"] = true;
+                echo "<p class='error'>¡Has de elegir un tipo de cerveza!</p>";
+            }
+        ?>
 
         <br><br>
 
@@ -102,10 +141,21 @@
 
         <input type="checkbox" name="alergenos[]" id="Sin Alergenos" value="Sin Alergenos">
         <label for="Sin Alergenos">Sin Alergenos</label>
+        
+        <?php if(isset($_POST['alergenos[]']) && $_POST['alergenos[]'] == ""){
+            $_SESSION["fallo"] = true;
+            echo "<p class='error'>¡Has de elegir alérgenos!</p>";
+        }
+        ?>
         <br><br>
         
         <label for="fechaConsumo" class="titulo" name="fechaConsumo">Fecha Consumo: </label>
         <input type="date" name="fechaConsumo" id="fechaConsumo">
+        <?php if(isset($_POST['fechaConsumo']) && empty($_POST['fechaConsumo'])){
+            $_SESSION["fallo"] = true;
+            echo "<p class='error'>¡Ha de tener una fecha de consumo máxima!</p>";
+        }
+        ?>
         <br><br>
         
         <label for="Imagen" id="Imagen" class="titulo" name="Imagen">Fotos</label>
@@ -113,8 +163,13 @@
         <br><br>
 
         <label for="precio" class="titulo">Precio: </label>
-        <input type="text">€
+        <input type="text" name="precio">€
         
+        <?php if(isset($_POST['precio']) && (empty($_POST['precio']) || !is_numeric($_POST['precio']))){
+            $_SESSION["fallo"] = true;
+            echo "<p class='error'>¡El precio debe ser un valor numérico y no puede estar vacío!</p>";
+        }
+        ?>
         <br><br>
 
         <label for="Observaciones" class="titulo" name="Observaciones">Observaciones</label>
