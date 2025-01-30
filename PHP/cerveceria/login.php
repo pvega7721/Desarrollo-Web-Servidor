@@ -16,6 +16,7 @@
             height: 100vh;
             background-color: #f4f4f4;
             font-family: Arial, sans-serif;
+            flex-direction: column;
         }
         .login-container {
             margin: 0 auto;
@@ -68,45 +69,44 @@
 </html>
 
 <?php 
-    $servername = "localhost";
+    $servername = "127.0.0.1:3308";
     $username = "root";
     $password = "";
     $dbname = "cerveceria";
-    
+
     $conn = new mysqli($servername, $username, $password, $dbname);
-    echo "ejemplo";
 
     if($conn->connect_error) {
         die("Conexión fallida: " . $conn->connect_error);
     }
 
+
+
     if($_SERVER["REQUEST_METHOD"] == "POST") {
-        $usuario = $_POST["usuario"];
+        $correo = $_POST["usuario"];
         $contrasena = $_POST["contraseña"];
 
-        if($_SERVER["REQUEST_METHOD"] == "POST") {
-            $correo = $_POST["usuario"];
-            $contrasena = $_POST["contraseña"];
-        }
-        if(($correo == '') || ($contrasena == '')){
+        if(empty($correo) OR empty($contrasena)){
             echo "Debes introducir todos los campos";
         }else{
             $sql = "SELECT `Correo`, `Password`, `Perfil` FROM `usuario` WHERE `Correo` LIKE '$correo' AND `Password` LIKE '$contrasena'";
             $resultado  = $conn->query($sql);
-        }
-
-        if($resultado -> num_rows > 0){
-            $row = $resultado->fetch_assoc();
-
-            if($row['Perfil'] == 'administrador'){
-            $_SESSION ['admin'] = true;
+            
+            if($resultado -> num_rows > 0){
+                $row = $resultado->fetch_assoc();
+                if($row['Perfil'] == 'administrador'){
+                    $_SESSION ['admin'] = true;
+                    header("Location: insertarCervezas.php");
+                }else{
+                    $_SESSION ['admin'] = false;
+                    header("Location: catalogo.php");
+                }
             }else{
-                $_SESSION ['admin'] = false;
+                echo "</br>No hay resultados";
             }
-            header("Location: cerveceria.php");
-        }else{
-            echo "</br>No hay resultados";
         }
+
+        
     }
     $conn->close();
         ?>
