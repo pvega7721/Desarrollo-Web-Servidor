@@ -2,6 +2,8 @@
 session_start();
 $_SESSION["fallo"] = false;
 
+
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($_POST['denominacion']) || empty($_POST['tipo']) || empty($_POST['fechaConsumo']) || empty($_POST['precio']) || !is_numeric($_POST['precio'])) {
         $_SESSION["fallo"] = true;
@@ -19,6 +21,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header("Location: mostrarDatos.php");
         exit();
 }
+}
+if($_SESSION["admin"]){
+    echo "Bienvenido Administrador";
+}else{
+    echo "Bienvenido Usuario";
 }
 ?>
 
@@ -45,6 +52,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         .error{
             color: red;
         }
+        .par{
+            display: flex;
+            justify-content: space-between;
+        }
     </style>
 </head>
 <body>
@@ -52,15 +63,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <p>Introduzca los datos de la Cerveza:</p>
 
     <form action="" method="post" enctype="multipart/form-data">
-
-        <label for="denominacion" class=titulo>Denominación cerveza:</label>
-        <input type="text" id="denominacion" name ="denominacion"><br><br>
+        <div class="par">
+            <label for="denominacion" class=titulo>Denominación cerveza:</label>
+            <input type="text" id="denominacion" name ="denominacion"><br><br>
+        </div>
 
         <?php if(isset($_POST['denominacion']) && empty($_POST['denominacion'])){
             $_SESSION["fallo"] = true;
             echo "<p class='error'>¡Se requiere el nombre de la Cerveza!</p>";
         }
         ?>
+        
         <label for="marca" class="titulo" >Marca:</label>
         <select name="marca" id="marca">
             <option value="Heiniken">Heiniken</option>
