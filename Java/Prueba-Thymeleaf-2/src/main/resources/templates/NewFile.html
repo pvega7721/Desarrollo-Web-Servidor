@@ -1,11 +1,18 @@
 <!DOCTYPE html>
+<!-- Permite usar th:text, ya que usa el motor de plantillas de thymeleaf  -->
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-	<title>Página de Inicio</title>
+<title>Página de Inicio</title>
 </head>
 <body>
 	<h1 th:text="${mensaje}"></h1>
 	<p th:text="'Hola, ' + ${nombre1}"></p>
+	<p th:utext="'Hola, ' + ${nombre2}"></p><!--utext Permite interpretar html en el texto -->
+	<img th:src="@{/imagenes/imagen.webp}" alt="Imagen"> <!-- No hace falta añadir nada respecto a esto en el .java -->
+	<a th:href="@{/index}">Cargar Index</a>
+	<p th:if="${role == 'admin'}">Eres administrador</p>
+	<p th:if="${role == 'usuario'}">Eres usuario</p>
+
 </body>
 </html>

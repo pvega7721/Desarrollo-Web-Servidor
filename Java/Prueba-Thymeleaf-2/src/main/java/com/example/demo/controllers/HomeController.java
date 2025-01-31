@@ -9,8 +9,16 @@ public class HomeController {
 
 	@GetMapping("/")
 	public String home(Model model) {
-		model.addAttribute("mensaje","Bienvenido a hola");
+		model.addAttribute("mensaje","Bienvenido a Thymeleaf");
 		model.addAttribute("nombre1", "Pablo Vega");
+		model.addAttribute("nombre2", "<b>Pablo Vega</b>");
+		model.addAttribute("role", "admin");
 		return "NewFile";//nombre de mi archivo html
 	}
+	
+	@GetMapping("/index")//necesario para que spring pueda ver el archivo index.html
+	public String index() {
+		return "index";
+	}
+		
 }
