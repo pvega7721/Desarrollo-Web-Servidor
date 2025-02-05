@@ -94,12 +94,15 @@
             
             if($resultado -> num_rows > 0){
                 $row = $resultado->fetch_assoc();
+                
                 if($row['Perfil'] == 'administrador'){
                     $_SESSION ['admin'] = true;
-                    header("Location: insertarCervezas.php");
+                    header("Location: seleccionAdmin.php");
+                    exit();
                 }else{
                     $_SESSION ['admin'] = false;
-                    header("Location: catalogo.php");
+                    header("Location: seleccionUser.php");
+                    exit();
                 }
             }else{
                 echo "</br>No hay resultados";

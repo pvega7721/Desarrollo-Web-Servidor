@@ -17,7 +17,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['fechaConsumo'] = $_POST['fechaConsumo'];
         $_SESSION['precio'] = $_POST['precio'];
         $_SESSION['observaciones'] = $_POST['Observaciones'] ?? ''; //las ?? hace que si no hay nada en observaciones, se envíe un string vacío
-    
+        // Procesar la imagen
+        /**
+         * Verifica si se ha recibido un archivo en el campo "Imagen" y que no se haya producido ningún error durante la carga.
+         * Si la carga fue exitosa (UPLOAD_ERR_OK), se genera la ruta de destino combinando el directorio "Imagenes/" 
+         * y el nombre base del archivo subido, y se mueve el archivo desde su ubicación temporal al destino.
+         * Luego, la ruta del archivo se almacena en la variable de sesión 'imagen' para su uso posterior.
+         * En caso de que no se reciba el archivo o se produzca algún error, se asigna una cadena vacía a 'imagen'.
+         */
+        if (isset($_FILES['Imagen']) && $_FILES['Imagen']['error'] === UPLOAD_ERR_OK) {
+            $destino = "Imagenes/" . basename($_FILES['Imagen']['name']);
+            move_uploaded_file($_FILES['Imagen']['tmp_name'], $destino);
+            $_SESSION['imagen'] = $destino;
+        } else {
+            $_SESSION['imagen'] = '';
+        }
         header("Location: mostrarDatos.php");
         exit();
 }
@@ -175,6 +189,12 @@ if($_SESSION["admin"]){
         
         <label for="Imagen" id="Imagen" class="titulo" name="Imagen">Fotos</label>
         <input type="file" name="Imagen"/>
+        <?php
+            if ($_SERVER['REQUEST_METHOD'] == 'POST' && (!isset($_FILES['Imagen']) || $_FILES['Imagen']['error'] !== UPLOAD_ERR_OK)) {
+            $_SESSION["fallo"] = true;
+            echo "<p class='error'>¡Debes subir una imagen!</p>";
+            }
+        ?>
         <br><br>
 
         <label for="precio" class="titulo">Precio: </label>

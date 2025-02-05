@@ -6,6 +6,6 @@
     <title>Catálogo</title>
 </head>
 <body>
-    <h1>Catalogo usuario</h1>
+    <h1>Catalogo Admin</h1>
 </body>
 </html>
