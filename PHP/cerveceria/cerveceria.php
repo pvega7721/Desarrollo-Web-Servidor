@@ -2,6 +2,8 @@
 session_start();
 $_SESSION["fallo"] = false;
 
+
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($_POST['denominacion']) || empty($_POST['tipo']) || empty($_POST['fechaConsumo']) || empty($_POST['precio']) || !is_numeric($_POST['precio'])) {
         $_SESSION["fallo"] = true;
@@ -19,6 +21,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header("Location: mostrarDatos.php");
         exit();
 }
+}
+if($_SESSION["admin"]){
+    echo "Bienvenido Administrador";
+}else{
+    echo "Bienvenido Usuario";
 }
 ?>
 

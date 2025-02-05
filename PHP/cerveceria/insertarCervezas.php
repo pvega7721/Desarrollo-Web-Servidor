@@ -104,12 +104,14 @@ if($_SESSION["admin"]){
         <input type="radio" name="tipo" id="rubia" value="rubia">
         <label for="rubia">RUBIA</label>
         <?php 
-
-            if (!isset($_POST['tipo'])) {
-                $_SESSION["fallo"] = true;
-                echo "<p class='error'>¡Has de elegir un tipo de cerveza!</p>";
+            if(isset($_POST['submit'])) { // Verifica si el formulario fue enviado
+                if (!isset($_POST['tipo'])) { // Si no se ha seleccionado un tipo de cerveza
+                    $_SESSION["fallo"] = true;
+                    echo "<p class='error'>¡Has de elegir un tipo de cerveza!</p>";
+                }   
             }
         ?>
+
 
         <br><br>
 
@@ -189,8 +191,7 @@ if($_SESSION["admin"]){
         <textarea rows="4" cols="50" name="Observaciones"></textarea>
         <br><br>   
 
-
-        <input type="submit" value="Insertar Cerveza">
+        <input type="submit" name="submit" value="Insertar Cerveza">
     </form>
 </body>
 </html>
