@@ -21,7 +21,7 @@ public class Cliente {
 	@Column
 	private String nombre;
 
-	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "direcion_id")
 	private Direccion direccion;
 

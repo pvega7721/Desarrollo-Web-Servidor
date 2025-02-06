@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<!-- Cliente-detalle.html -->
+<title>Detalles cliente</title>
+</head>
+<body>
+	<h1>Detalles del cliente</h1>
+	
+	<p><b>ID: </b> <span th:text="${cliente.id}"></span></p>
+	<p><b>Nombre: </b> <span th:text="${cliente.nombre}"></span></p>
+	<p><b>Calle: </b> <span th:text="${cliente.direccion.calle}"></span></p>
+	<p><b>Ciudad: </b> <span th:text="${cliente.direccion.ciudad}"></span></p>
+	
+	<br>
+	<a th:href="@{/clientes}">Volver al listado</a>
+</body>
+</html>
