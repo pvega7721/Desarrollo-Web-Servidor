@@ -1,4 +1,4 @@
-package com.example.demo.modelo;
+package com.example.demo.model;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -11,32 +11,32 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "cliente")
+@Table(name="cliente")
 public class Cliente {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-	@Column
-	private String nombre;
+    @Column
+    private String nombre;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "direcion_id")
-	private Direccion direccion;
-
-	// Constructor vacío
-	public Cliente() {
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
+    @JoinColumn(name = "direccion_id")
+    private Direccion direccion;
+        
+    public Cliente() {
 		super();
 	}
 
-//Constructor con parámeros
 	public Cliente(String nombre, Direccion direccion) {
 		super();
+	
 		this.nombre = nombre;
 		this.direccion = direccion;
 	}
 
+	// Getters y Setters    
 	public Integer getId() {
 		return id;
 	}

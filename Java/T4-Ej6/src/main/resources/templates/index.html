@@ -17,8 +17,7 @@
 			<td th:text="${cliente.id}"></td>
 			<td th:text="${cliente.nombre}"></td>
 			<td th:text="${cliente.direccion.ciudad}"></td>
-			<td><a th:href="@{/clientes/detalles/{id}(id=${cliente.id})}">Ver
-					detalles</a></td>
+			<td><a th:href="@{/clientes/detalles/{id}(id=${cliente.id})}">Ver</a></td>
 		</tr>
 		
 	</table>

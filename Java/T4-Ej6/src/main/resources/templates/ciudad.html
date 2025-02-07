@@ -8,7 +8,7 @@
 <body>
 	<h1>Buscar Clientes por Ciudad</h1>
 	
-	<form th:action="@{/clientes/ciudad" th:object ="${direccion} method="get">
+	<form th:action="@{/clientes/ciudad}" method="get">
 		<label>Ciudad: <input type="text" th:field="*{direccion.ciudad}"></label>
 		<button type="submit">Buscar</button>
 	</form>
@@ -18,6 +18,6 @@
 		<li th:each="cliente: ${clientes}" th:text="${cliente.nombre}"></li>
 	</ul>
 	
-	<a th:href="@{/clientes}">Volver al listado</a>
+	<a th:href="@{/clientes/listar}">Volver al listado</a>
 </body>
 </html>

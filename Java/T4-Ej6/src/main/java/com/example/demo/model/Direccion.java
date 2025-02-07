@@ -1,4 +1,4 @@
-package com.example.demo.modelo;
+package com.example.demo.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,15 +8,18 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Direccion {
+
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Column
 	private String calle;
 	
 	@Column
 	private String ciudad;
+
+	// Getters y Setters
 
 	public Integer getId() {
 		return id;
@@ -46,6 +49,5 @@ public class Direccion {
 	public String toString() {
 		return "Direccion [id=" + id + ", calle=" + calle + ", ciudad=" + ciudad + "]";
 	}
-	
 	
 }

@@ -12,26 +12,27 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.demo.modelo.Cliente;
-import com.example.demo.service.Servicio;
+import com.example.demo.model.Cliente;
+import com.example.demo.model.Direccion;
+import com.example.demo.service.ClienteService;
 
 @Controller
 @RequestMapping("/clientes")
 public class HomeController {
 
 	@Autowired
-	private Servicio service;
+	private ClienteService service;
 
 	private List<Cliente> clientes = new ArrayList<>();
 
-	@GetMapping("/")
+	@GetMapping("/listar")//http://localhost:8080/clientes/listar
 	public String listarClientes(Model model) {
-		model.addAttribute("clientes", service.getClientes());
+		model.addAttribute("clientes", service.getAllClientes());
 		return "index";
 	}
 	
 	
-	@GetMapping("detalles")
+	@GetMapping("/detalles/{id}")
 	public String listarClientes(@RequestParam int id, Model model) {
 		Cliente cliente = null;
 		for(Cliente c: clientes) {
@@ -53,15 +54,18 @@ public class HomeController {
 	@PostMapping("/guardarCliente")
 	public String guardarCLiente(@ModelAttribute Cliente cliente) {
 		System.out.println("Nombre: " + cliente.getNombre());
-		service.insertarCliente(cliente);
+		service.saveCliente(cliente);
 		
-		return "redirect:/clientes";
+		return "redirect:/clientes/listar";
 	}
 	
 	@GetMapping("/ciudad")
-	public String buscarPorCiudad(@ModelAttribute String ciudad, Model model) {
+	public String buscarPorCiudad(@RequestParam(name = "ciudad") String ciudad, Model model) {
 		List<Cliente>filtrados = new ArrayList<>();
-		if(ciudad != null) {
+		
+		model.addAttribute("direccion", new Direccion());
+		
+		if(ciudad != null && !ciudad.isEmpty()) {
 			for (Cliente cliente : clientes) {
 				if(cliente.getDireccion().getCiudad().equalsIgnoreCase(ciudad)) {
 					filtrados.add(cliente);
