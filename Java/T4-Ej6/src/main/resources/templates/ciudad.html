@@ -8,7 +8,7 @@
 <body>
 	<h1>Buscar Clientes por Ciudad</h1>
 	
-	<form th:action="@{/clientes/ciudad}" method="get">
+	<form th:action="@{/clientes/buscarCiudad}" method="get">
 		<label>Ciudad: <input type="text" th:field="*{direccion.ciudad}"></label>
 		<button type="submit">Buscar</button>
 	</form>

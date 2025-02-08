@@ -1,3 +1,4 @@
+/*
 package com.example.demo.controller;
 
 import java.util.ArrayList;
@@ -70,7 +71,7 @@ public class ClienteController {
 			return ResponseEntity.notFound().build();
 		}
 	}*/
-
+/*
 	@PutMapping("/direccion/{idCliente}")
 	public ResponseEntity<Cliente> actualizarDireccion(@PathVariable Integer idCliente,
 			@RequestBody Direccion nuevaDireccion) {
@@ -109,3 +110,4 @@ public class ClienteController {
 	
 	
 }
+*/

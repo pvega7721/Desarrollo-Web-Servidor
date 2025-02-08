@@ -25,49 +25,56 @@ public class HomeController {
 
 	private List<Cliente> clientes = new ArrayList<>();
 
-	@GetMapping("/listar")//http://localhost:8080/clientes/listar
+	@GetMapping("/listar")
 	public String listarClientes(Model model) {
 		model.addAttribute("clientes", service.getAllClientes());
 		return "index";
 	}
-	
-	
+
 	@GetMapping("/detalles/{id}")
 	public String listarClientes(@RequestParam int id, Model model) {
+		List<Cliente> clientes = service.getAllClientes();
 		Cliente cliente = null;
-		for(Cliente c: clientes) {
-			if(c.getId() == id) {
+		for (Cliente c : clientes) {
+			if (c.getId() == id) {
 				cliente = c;
 				break;
 			}
 		}
-		model.addAttribute("cliente",cliente);
+		model.addAttribute("cliente", cliente);
 		return "cliente-detalle";
 	}
-	
+
 	@GetMapping("/formulario")
 	public String formulario(Model model) {
 		model.addAttribute("cliente", new Cliente());
 		return "cliente-formulario";
 	}
-	
+
 	@PostMapping("/guardarCliente")
 	public String guardarCLiente(@ModelAttribute Cliente cliente) {
 		System.out.println("Nombre: " + cliente.getNombre());
 		service.saveCliente(cliente);
-		
+
 		return "redirect:/clientes/listar";
 	}
-	
+
 	@GetMapping("/ciudad")
-	public String buscarPorCiudad(@RequestParam(name = "ciudad") String ciudad, Model model) {
-		List<Cliente>filtrados = new ArrayList<>();
-		
+	public String ciudad(Model model) {
 		model.addAttribute("direccion", new Direccion());
-		
-		if(ciudad != null && !ciudad.isEmpty()) {
+		return "ciudad";
+	}
+
+	@GetMapping("/buscarCiudad")
+	public String buscarPorCiudad(@RequestParam String ciudad, Model model) {
+		List<Cliente> filtrados = new ArrayList<>();
+		List<Cliente> clientes = service.getAllClientes();
+
+		model.addAttribute("direccion", new Direccion());
+
+		if (ciudad != null && !ciudad.isEmpty()) {
 			for (Cliente cliente : clientes) {
-				if(cliente.getDireccion().getCiudad().equalsIgnoreCase(ciudad)) {
+				if (cliente.getDireccion().getCiudad().equalsIgnoreCase(ciudad)) {
 					filtrados.add(cliente);
 				}
 			}
@@ -75,8 +82,5 @@ public class HomeController {
 		model.addAttribute("clientes", filtrados);
 		return "ciudad";
 	}
-	
-	
-	
-	
+
 }
