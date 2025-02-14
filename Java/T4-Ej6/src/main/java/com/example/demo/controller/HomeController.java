@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,7 +33,7 @@ public class HomeController {
 	}
 
 	@GetMapping("/detalles/{id}")
-	public String listarClientes(@RequestParam int id, Model model) {
+	public String listarClientes(@PathVariable int id, Model model) { //hay que usar @PathVariable en lugar de @RequestParam, ya que el id se pasa como parte de la url y no como parámetro de consulta
 		List<Cliente> clientes = service.getAllClientes();
 		Cliente cliente = null;
 		for (Cliente c : clientes) {
