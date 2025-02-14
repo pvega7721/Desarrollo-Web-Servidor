@@ -40,11 +40,11 @@
     </style>
 </head>
 <body>
+    <a href="login.php">Volver al login</a>
     <h1>¿Qué quieres hacer?</h1>
     <div class="opciones">
         <a href="insertarCervezas.php">Insertar cerveza</a>
-        <a href="catalogoAdmin.php">Modificar cerveza</a>
-        <a href="catalogoAdmin.php">Eliminar cerveza</a>
+        <a href="catalogoAdmin.php">Modificar/Eliminar cerveza</a>
     </div>
 </body>
 </html>

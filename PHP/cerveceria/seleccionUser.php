@@ -40,6 +40,7 @@
     </style>
 </head>
 <body>
+    <a href="login.php">Volver al login</a>
     <h1>¿Qué quieres ver?</h1>
     <div class="opciones">
         <a href="catalogo.php">Catálogo</a>

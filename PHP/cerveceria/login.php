@@ -80,8 +80,6 @@
         die("Conexión fallida: " . $conn->connect_error);
     }
 
-
-
     if($_SERVER["REQUEST_METHOD"] == "POST") {
         $correo = $_POST["usuario"];
         $contrasena = $_POST["contraseña"];

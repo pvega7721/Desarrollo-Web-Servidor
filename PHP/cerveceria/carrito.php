@@ -6,6 +6,7 @@
     <title>Carrito</title>
 </head>
 <body>
+    <a href="seleccionUser.php">Volver al menú</a>
     <h1>Carrito</h1>
 </body>
 </html>
