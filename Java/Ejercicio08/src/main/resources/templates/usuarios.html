@@ -23,7 +23,7 @@
                 <td th:text="${usuario.perfil.bio}"></td>
                 <td>
                     <a th:href="@{/usuario/{id}(id=${usuario.id})}">Ver</a>
-                    <a th:href="@{/usuario/editar/{id}(id=${usuario.id})}">Editar</a>
+                    <a th:href="@{/usuarios/formulario/{id}(id=${usuario.id})}">Editar</a>
                     <form th:action="@{/usuario/{id}(id=${usuario.id})}" method="post">
                         <input type="hidden" name="_method" value="delete" />
                         <button type="submit">Eliminar</button>

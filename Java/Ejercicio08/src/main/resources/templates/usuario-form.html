@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Formulario de Usuario</title>
+<title>Formulario de Usuario</title>
 </head>
 <body>
-    <h1 th:if="${usuario.id == null}">Añadir Usuario</h1>
-    <h1 th:if="${usuario.id != null}">Editar Usuario</h1>
+	<!-- Si el usuario no tiene id, se muestra "añadir usuario" si tiene se muestra "modificar usuario" -->
+	<h1 th:if="${usuario.id == null}">Añadir Usuario</h1>
+	<h1 th:if="${usuario.id != null}">Editar Usuario</h1>
 
-    <form th:action="@{${usuario.id == null} ? '/usuario/nuevo' : '/usuario/editar'}" method="post">
-        <input type="hidden" th:if="${usuario.id != null}" th:name="id" th:value="${usuario.id}" />
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" th:value="${usuario.nombre}" required />
+	<form
+		th:action="@{${usuario.id == null} ? '/usuario/nuevo' : '/usuario/editar'}"
+		method="post">
+		<input type="hidden" th:if="${usuario.id != null}" th:name="id"
+			th:value="${usuario.id}" /> <label for="nombre">Nombre:</label> <input
+			type="text" id="nombre" name="nombre" th:value="${usuario.nombre}"
+			required /> <label for="email">Email:</label> <input type="email"
+			id="email" name="email" th:value="${usuario.email}" required /> <label
+			for="bio">Biografía:</label>
+		<textarea id="bio" name="bio" th:value="${usuario.perfil.bio}"></textarea>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" th:value="${usuario.email}" required />
+		<label for="estado">Estado:</label> <input type="text" id="estado"
+			name="estrado" th:value="${usuario.perfil.estado}" required />
 
-        <label for="bio">Biografía:</label>
-        <textarea id="bio" name="bio" th:value="${usuario.perfil.bio}"></textarea>
-
-        <label for="estado">Estado:</label>
-        <input type="text" id="estado" name="estrado" th:value="${usuario.perfil.estado}" required />
-       
-
-        <button type="submit">Guardar</button>
-    </form>
+		<button type="submit">Guardar</button>
+	</form>
 </body>
 </html>
