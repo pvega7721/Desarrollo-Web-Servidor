@@ -6,8 +6,9 @@
 <body>
     <h1>Gestión de Usuarios y Perfiles</h1>
     <ul>
-        <li><a th:href="@{/usuarios}">Ver todos los usuarios</a></li>
-        <li><a th:href="@{/usuario/nuevo}">Añadir un nuevo usuario</a></li>
+    	<!-- las rutas de th:href llevan a los endpoints del HomeController -->
+        <li><a th:href="@{/usuarios/listar}">Ver todos los usuarios</a></li>
+        <li><a th:href="@{/usuarios/formulario}">Añadir un nuevo usuario</a></li>
         <li><a th:href="@{/usuarios/bio?palabra=edad}">Primer usuario disponible</a></li>
        
     </ul>

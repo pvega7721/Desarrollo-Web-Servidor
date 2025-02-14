@@ -1,3 +1,4 @@
+/*
 package com.ej08.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,7 @@ public class UsuarioController {
     public String eliminarUsuario(@PathVariable Long id) {
         usuarioService.eliminar(id);
         return "redirect:/usuarios";
-    }*/
+    }
 
 }
+*/
