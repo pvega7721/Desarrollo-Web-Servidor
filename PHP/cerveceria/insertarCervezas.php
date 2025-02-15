@@ -23,47 +23,53 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             $_SESSION['imagen'] = '';
         }
-    
+
         header("Location: mostrarDatos.php");
         exit();
     }
 }
-if($_SESSION["admin"]){
+if ($_SESSION["admin"]) {
     echo "Bienvenido Administrador";
-}else{
+} else {
     echo "Bienvenido Usuario";
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cervecería</title>
-    
+
     <style>
-        h1{
+        h1 {
             color: blue;
         }
-        form{
+
+        form {
             border: 1px solid;
             padding: 5px;
             margin-right: 40%;
             width: 80%;
         }
-        .titulo{
+
+        .titulo {
             font-weight: bold;
         }
-        .error{
+
+        .error {
             color: red;
         }
-        .par{
+
+        .par {
             display: flex;
             justify-content: space-between;
         }
     </style>
 </head>
+
 <body>
     <a href="seleccionAdmin.php">Volver al menú</a>
     <h1>Inserción de Cervezas</h1>
@@ -72,16 +78,16 @@ if($_SESSION["admin"]){
     <form action="" method="post" enctype="multipart/form-data">
         <div class="par">
             <label for="denominacion" class=titulo>Denominación cerveza:</label>
-            <input type="text" id="denominacion" name ="denominacion"><br><br>
+            <input type="text" id="denominacion" name="denominacion"><br><br>
         </div>
 
-        <?php if(isset($_POST['denominacion']) && empty($_POST['denominacion'])){
+        <?php if (isset($_POST['denominacion']) && empty($_POST['denominacion'])) {
             $_SESSION["fallo"] = true;
             echo "<p class='error'>¡Se requiere el nombre de la Cerveza!</p>";
         }
         ?>
-        
-        <label for="marca" class="titulo" >Marca:</label>
+
+        <label for="marca" class="titulo">Marca:</label>
         <select name="marca" id="marca">
             <option value="Heiniken">Heiniken</option>
             <option value="Mahou">Mahou</option>
@@ -92,8 +98,8 @@ if($_SESSION["admin"]){
             <option value="Artesana">Artesana</option>
         </select>
 
-        <br><br>        
-        
+        <br><br>
+
         <label for="tipo" class="titulo">Tipo de cerveza:</label>
 
         <input type="radio" name="tipo" id="larger" value="larger">
@@ -101,22 +107,22 @@ if($_SESSION["admin"]){
 
         <input type="radio" name="tipo" id="paleale" value="paleale">
         <label for="paleale">PALE ALE</label>
-        
+
         <input type="radio" name="tipo" id="cerveza_negra" value="cerveza_negra">
         <label for="cerveza_negra">CERVEZA NEGRA</label>
-        
+
         <input type="radio" name="tipo" id="abadia" value="abadia">
         <label for="abadia">ABADIA</label>
-        
+
         <input type="radio" name="tipo" id="rubia" value="rubia">
         <label for="rubia">RUBIA</label>
-        <?php 
-            if(isset($_POST['submit'])) { // Verifica si el formulario fue enviado
-                if (!isset($_POST['tipo'])) { // Si no se ha seleccionado un tipo de cerveza
-                    $_SESSION["fallo"] = true;
-                    echo "<p class='error'>¡Has de elegir un tipo de cerveza!</p>";
-                }   
+        <?php
+        if (isset($_POST['submit'])) { // Verifica si el formulario fue enviado
+            if (!isset($_POST['tipo'])) { // Si no se ha seleccionado un tipo de cerveza
+                $_SESSION["fallo"] = true;
+                echo "<p class='error'>¡Has de elegir un tipo de cerveza!</p>";
             }
+        }
         ?>
 
 
@@ -128,9 +134,9 @@ if($_SESSION["admin"]){
             <option value="Botella">Botella</option>
             <option value="Pack">Pack</option>
         </select>
-        
+
         <br><br>
-        
+
         <label for="embase" class="titulo">Tamaño: </label>
         <select name="embase" id="embase">
             <option value="botellin">Botellín</option>
@@ -139,7 +145,7 @@ if($_SESSION["admin"]){
             <option value="Litro">Litrona</option>
             <option value="Lata">Pack</option>
         </select>
-        
+
         <br><br>
 
         <label for="alergenos[]" class="titulo" name="alergenos[]">Alérgenos:</label>
@@ -163,31 +169,31 @@ if($_SESSION["admin"]){
 
         <input type="checkbox" name="alergenos[]" id="Sin Alergenos" value="Sin Alergenos">
         <label for="Sin Alergenos">Sin Alergenos</label>
-        
-        <?php if(isset($_POST['alergenos[]']) && $_POST['alergenos[]'] == ""){
+
+        <?php if (isset($_POST['alergenos[]']) && $_POST['alergenos[]'] == "") {
             $_SESSION["fallo"] = true;
             echo "<p class='error'>¡Has de elegir alérgenos!</p>";
         }
         ?>
         <br><br>
-        
+
         <label for="fechaConsumo" class="titulo" name="fechaConsumo">Fecha Consumo: </label>
         <input type="date" name="fechaConsumo" id="fechaConsumo">
-        <?php if(isset($_POST['fechaConsumo']) && empty($_POST['fechaConsumo'])){
+        <?php if (isset($_POST['fechaConsumo']) && empty($_POST['fechaConsumo'])) {
             $_SESSION["fallo"] = true;
             echo "<p class='error'>¡Ha de tener una fecha de consumo máxima!</p>";
         }
         ?>
         <br><br>
-        
+
         <label for="Imagen" id="Imagen" class="titulo" name="Imagen">Fotos</label>
-        <input type="file" name="Imagen"/>
+        <input type="file" name="Imagen" />
         <br><br>
 
         <label for="precio" class="titulo">Precio: </label>
         <input type="text" name="precio">€
-        
-        <?php if(isset($_POST['precio']) && (empty($_POST['precio']) || !is_numeric($_POST['precio']))){
+
+        <?php if (isset($_POST['precio']) && (empty($_POST['precio']) || !is_numeric($_POST['precio']))) {
             $_SESSION["fallo"] = true;
             echo "<p class='error'>¡El precio debe ser un valor numérico y no puede estar vacío!</p>";
         }
@@ -196,9 +202,10 @@ if($_SESSION["admin"]){
 
         <label for="Observaciones" class="titulo" name="Observaciones">Observaciones</label>
         <textarea rows="4" cols="50" name="Observaciones"></textarea>
-        <br><br>   
+        <br><br>
 
         <input type="submit" name="submit" value="Insertar Cerveza">
     </form>
 </body>
+
 </html>

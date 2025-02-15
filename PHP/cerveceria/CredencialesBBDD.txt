@@ -1,0 +1,7 @@
+Usuario: 
+	usuario:ejemplo@ejemplo.com
+	contraseña:1234
+
+Admin:
+	usuario:admin@admin.com
+	contraseña:root
