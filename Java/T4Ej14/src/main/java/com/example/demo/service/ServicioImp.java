@@ -20,7 +20,6 @@ public class ServicioImp implements Servicio {
 	private Repositorio repo;
 
 	@Override
-	@Transactional
 	public void actualizarCorreoEstudiantePorId(Integer id, String nuevoEmail) {
 		Estudiante estudiante = repo.getEstudiantePorId(id);
 		estudiante.setEmail(nuevoEmail);
@@ -46,7 +45,6 @@ public class ServicioImp implements Servicio {
 	 * introducido, le asigna la lista modificada al curso y lo actualiza en bbdd
 	 */
 	@Override
-	@Transactional
 	public void setEstudianteACurso(Estudiante estudiante, Curso curso) {
 		List<Estudiante> estudiantes = curso.getEstudiantes();
 
@@ -74,7 +72,6 @@ public class ServicioImp implements Servicio {
 	 * 
 	 */
 	@Override
-	@Transactional
 	public void BorrarEstudianteDeCurso(Estudiante estudiante, Curso curso) {
 		List<Estudiante> estudiantesCurso = curso.getEstudiantes();
 

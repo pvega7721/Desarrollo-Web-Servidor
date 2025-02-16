@@ -15,7 +15,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table
+@Table(name= "curso")
 public class Curso {
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
