@@ -20,7 +20,7 @@ session_start();
             flex-direction: column;
         }
 
-        .login-container {
+        .login {
             margin: 0 auto;
             display: flex;
             flex-direction: column;
@@ -33,11 +33,11 @@ session_start();
             text-align: center;
         }
 
-        .login-container h2 {
+        .login h2 {
             margin-bottom: 20px;
         }
 
-        .login-container input {
+        .login input {
             align-self: center;
             width: 80%;
             padding: 10px;
@@ -47,7 +47,7 @@ session_start();
 
         }
 
-        .login-container button {
+        .login button {
             width: 100%;
             padding: 10px;
             background-color: #28a745;
@@ -57,14 +57,14 @@ session_start();
             cursor: pointer;
         }
 
-        .login-container button:hover {
+        .login button:hover {
             background-color: #218838;
         }
     </style>
 </head>
 
 <body>
-    <div class="login-container">
+    <div class="login">
         <h1>Iniciar Sesión</h1>
         <form action="" method="post">
             <input type="text" name="usuario" placeholder="Usuario">
