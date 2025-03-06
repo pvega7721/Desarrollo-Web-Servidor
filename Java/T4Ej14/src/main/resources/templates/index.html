@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Página de inicio</title>
+</head>
+<body>
+	<h1>Bienvenido a la página principal</h1>
+	<!-- La ruta debe incluir el RequestMapping -->
+	<a th:href="@{/curso/listarCursos}">Mostrar listado de cursos</a>
+</body>
+</html>
